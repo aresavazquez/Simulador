@@ -7,7 +7,7 @@
 
     <link href="http://code.ionicframework.com/1.0.0-rc.5/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link href="css/museo.css" rel="stylesheet">
+    <link href="css/museo/museo.css" rel="stylesheet">
 
     <script src="http://code.ionicframework.com/1.0.0-rc.5/js/ionic.bundle.min.js"></script>
     <script src="js/ng-cordova.min.js"></script>
@@ -25,12 +25,24 @@
             </ion-header-bar>
             <ion-content>
                 <ion-list>
+                    <ion-item menu-close href="#/simular">
+                        Simulador
+                        <i class="ion-ios-arrow-right"></i>
+                    </ion-item>
                     <ion-item menu-close href="#/dash">
                         Prospecto
                         <i class="ion-ios-arrow-right"></i>
                     </ion-item>
-                    <ion-item menu-close href="#/simular">
-                        Simulador
+                    <ion-item menu-close href="#/historial">
+                        Historial
+                        <i class="ion-ios-arrow-right"></i>
+                    </ion-item>
+                    <ion-item menu-close href="#/perfil">
+                        Perfil
+                        <i class="ion-ios-arrow-right"></i>
+                    </ion-item>
+                    <ion-item menu-close href="#/aviso">
+                        Aviso de privacidad
                         <i class="ion-ios-arrow-right"></i>
                     </ion-item>
                 </ion-list>
@@ -50,12 +62,29 @@
                 <ion-nav-back-button></ion-nav-back-button>
             </ion-nav-bar>
             <ion-tabs class="tabs-icon-top tabs-stable">
+
+
                 <ion-tab title="Simulador" icon-off="ion-ios-calculator-outline" icon-on="ion-calculator" href="#/simular">
                     <ion-nav-view name="tab-simular"></ion-nav-view>
                 </ion-tab>
+
                 <ion-tab title="Prospecto" icon-off="ion-ios-person-outline" icon-on="ion-person-add" href="#/dash">
                     <ion-nav-view name="tab-dash"></ion-nav-view>
                 </ion-tab>
+
+                <ion-tab title="Historial" icon-off="ion-ios-calendar-outline" icon-on="ion-ios-calendar" href="#/historial">
+                    <ion-nav-view name="tab-historial"></ion-nav-view>
+                </ion-tab>
+
+                <ion-tab title="Perfil" icon-off="ion-ios-compose-outline" icon-on="ion-ios-compose" href="#/perfil">
+                    <ion-nav-view name="tab-perfil"></ion-nav-view>
+                </ion-tab>
+
+                <ion-tab title="Aviso" icon-off="ion-ios-information-outline" icon-on="ion-ios-information" href="#/aviso">
+                    <ion-nav-view name="tab-aviso"></ion-nav-view>
+                </ion-tab>
+
+
             </ion-tabs>
         </ion-side-menu-content>
 

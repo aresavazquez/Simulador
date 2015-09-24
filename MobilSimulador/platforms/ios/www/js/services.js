@@ -388,7 +388,7 @@ angular.module('app.services', [])
                     break;
             }
         },
-        calculoComisionApertura(montoCredito, idBanco) {
+        calculoComisionApertura:function(montoCredito, idBanco) {
             switch (idBanco) {
                 case 3:
                     return montoCredito * 0.0125;

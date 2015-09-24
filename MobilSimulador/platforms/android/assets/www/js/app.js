@@ -63,15 +63,43 @@
             }
         })
 
-        $stateProvider.state('simular', {
-            url: '/simular',
+       $stateProvider.state('simular', {
+           url: '/simular',
+           views: {
+               'tab-simular': {
+                   templateUrl: 'templates/tab-simulador.html',
+                   controller: 'SimulaCtrl'
+               }
+           }
+       })
+
+        $stateProvider.state('historial', {
+            url: '/historial',
             views: {
-                'tab-simular': {
-                    templateUrl: 'templates/tab-simulador.html',
-                    controller: 'SimulaCtrl'
+                'tab-historial': {
+                    templateUrl: 'templates/historial.html'
                 }
             }
         })
+
+        $stateProvider.state('perfil', {
+            url: '/perfil',
+            views: {
+                'tab-perfil': {
+                    templateUrl: 'templates/perfil.html'
+                }
+            }
+        })
+
+        $stateProvider.state('aviso', {
+            url: '/aviso',
+            views: {
+                'tab-aviso': {
+                    templateUrl: 'templates/aviso.html'
+                }
+            }
+        })
+
 
         $urlRouterProvider.otherwise('/dash');
     });
