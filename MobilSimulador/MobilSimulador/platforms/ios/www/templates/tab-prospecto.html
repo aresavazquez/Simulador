@@ -1,0 +1,57 @@
+<ion-view view-title="Simulador">
+    <ion-content class="padding">
+        <div class="list card">
+            <div class="item item-divider">
+                Prospecto
+            </div>
+            <div class="list">
+                <div class="item item-input-inset">
+                    <label class="item-input-wrapper">
+                        <input type="text" placeholder="Nombre">
+                    </label>
+                </div>
+                <div class="item item-input-inset">
+                    <label class="item-input-wrapper">
+                        <input type="email" placeholder="Correo prospecto">
+                    </label>
+                </div>
+                <div class="item item-input-inset">
+                    <label class="item-input-wrapper">
+                        <input type="text" placeholder="Tel&eacute;fono">
+                    </label>
+                </div>
+                <label class="item">
+                    <select class="ion-input-select--large">
+                        <option ng-repeat="estado in estados" value="{{estado.id}}">
+                            {{estado.nombre}}
+                        </option>
+                    </select>
+                </label>
+                <div class="item item-input-inset">
+                    <label class="item-input-wrapper">
+                        <input type="number" placeholder="Valor del inmueble">
+                    </label>
+                </div>
+                <label class="item">
+                    <select class="ion-input-select--large">
+                        <option ng-repeat="mensualidad in mensualidades" value="{{mensualidad.id}}">
+                            {{mensualidad.nombre}}
+                        </option>
+                    </select>
+                </label>
+                <label class="item">
+                    <select class="ion-input-select--large">
+                        <option ng-repeat="plazo in plazos" value="{{plazo.id}}">
+                            {{plazo.nombrePlazo}}
+                        </option>
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div>
+            <button class="button button-block button-outline button-calm" ng-click="enviarMail()">
+                Enviar correo
+            </button>
+        </div>
+    </ion-content>
+</ion-view>
