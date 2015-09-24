@@ -106,6 +106,19 @@ li{
 .item-icon-left {
     padding-left: 25px;
 }
+.item.item-positive {
+    border-color: #fff;
+    background-color: #41546e;
+    color: #1dafec;
+    text-align: -webkit-left;
+    font-size: 20px;
+}
+.icon.ion-plus{
+    margin-right: 20px;
+}
+.icon.ion-minus{
+    margin-right: 20px;
+}
 .tabs-top.tabs-striped .tab-item.tab-item-active, .tabs-top.tabs-striped .tab-item.active, .tabs-top.tabs-striped .tab-item.activated {
     border-width: 0px 0px 5px 0px !important;
 }

@@ -71,7 +71,7 @@ angular.module('app.services', [])
     };
 })
 
-serv.factory('ServicioCompara', [function () {
+.factory('ServicioCompara', [function () {
     return {
         Compare: function (a, b) {
             if (a.Nombre < b.Nombre)
@@ -81,7 +81,7 @@ serv.factory('ServicioCompara', [function () {
             return 0;
         }
     };
-}]);
+}])
 
 .factory('Simula', function () {
     var simula = [
