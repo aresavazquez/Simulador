@@ -21,6 +21,12 @@ input, button, select, textarea{
     color: #41546e;
     height: 35px;
     border: none;
+
+}
+select{
+    border-bottom: 1px solid #1dafec;
+    background: none;
+    border-radius: 0px;
 }
 .button.button-calm.button-outline {
     border: none;
@@ -130,6 +136,9 @@ li{
 .simular .card .checkAviso{
     margin-bottom: 0;
 }
+.acepto{
+    pointer-events: visible;
+}
 .bar .buttons-right span{
     display: block;
 }
@@ -140,6 +149,8 @@ li{
     background: url(../img/gradient.png)no-repeat;
     height: 15px;
     background-size: cover;
+    position: fixed;
+    width: 100%;
 }
 .popup-container.active .popup{
     background: #C7C7C7;
@@ -155,3 +166,12 @@ li{
 .padding.resultado .scroll{
     padding: 10px 0;
 }
+
+.item{
+    border-width: 0px;
+}
+.valor{
+    padding-top: 50px;
+}
+
+
