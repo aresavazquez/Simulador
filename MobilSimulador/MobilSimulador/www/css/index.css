@@ -209,9 +209,13 @@ md-select {
 [md-ink-ripple] {
     position: relative;
 }
-.card {
+.card.simulador {
     padding-top: 30px;
 }
-
-
+.card{
+    padding-top: 30px;
+}
+.card.avisocard{
+  padding-top: 0;
+}
 

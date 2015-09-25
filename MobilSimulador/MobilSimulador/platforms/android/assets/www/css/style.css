@@ -173,5 +173,12 @@ li{
 .valor{
     padding-top: 50px;
 }
+.mensualidad{
+    font-size: 20px;
+    font-weight: 100;
+    text-align: -webkit-center;
+    color: #41546e;
+    text-transform: uppercase;
+}
 
 
