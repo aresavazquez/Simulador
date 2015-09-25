@@ -109,7 +109,7 @@ li{
 .item.item-positive {
     border-color: #fff;
     background-color: #41546e;
-    color: #1dafec;
+    color: #fff;
     text-align: -webkit-left;
     font-size: 20px;
 }
@@ -121,4 +121,37 @@ li{
 }
 .tabs-top.tabs-striped .tab-item.tab-item-active, .tabs-top.tabs-striped .tab-item.active, .tabs-top.tabs-striped .tab-item.activated {
     border-width: 0px 0px 5px 0px !important;
+}
+.simular .card .aviso{
+    text-align: center;
+    background: #41546e;
+    color: #fff;
+}
+.simular .card .checkAviso{
+    margin-bottom: 0;
+}
+.bar .buttons-right span{
+    display: block;
+}
+.bar .buttons-right span img{
+    width: 75px;
+}
+.bar.bar-balanced.bar-footer{
+    background: url(../img/gradient.png)no-repeat;
+    height: 15px;
+    background-size: cover;
+}
+.popup-container.active .popup{
+    background: #C7C7C7;
+}
+.item.active.item-positive{
+    border: none;
+    background-color: #92A6B5;
+    color: #fff;
+}
+.padding.resultado{
+    padding: 0;
+}
+.padding.resultado .scroll{
+    padding: 10px 0;
 }
