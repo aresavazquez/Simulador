@@ -215,7 +215,9 @@ md-select {
 .card{
     padding-top: 30px;
 }
-.card.avisocard{
+.avisocard{
   padding-top: 0;
 }
-
+.card.resultado{
+  padding: 0;
+}

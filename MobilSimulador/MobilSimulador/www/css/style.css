@@ -166,7 +166,6 @@ li{
 .padding.resultado .scroll{
     padding: 10px 0;
 }
-
 .item{
     border-width: 0px;
 }
@@ -180,5 +179,11 @@ li{
     color: #41546e;
     text-transform: uppercase;
 }
-
-
+.item.activated.item-positive {
+    border-color: #41546e;
+    background-color: #41546e;
+    color: #fff;
+}
+.item.item-text-wrap p{
+    text-align: justify;
+}
