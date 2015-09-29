@@ -1,10 +1,10 @@
 ﻿<ion-view view-title="Resultado">
     <ion-header-bar align-title="center" class="bar-positive"></ion-header-bar>
     <ion-content class="padding resultado">
-        <div class="card  resultado">
+        <div class="card resultado">
             <div class="item item-text-wrap mensualidad">
                 <i class="ion-social-usd"></i>
-                20 Creciente
+                15 Creciente
             </div>
         </div>
         <ion-list>
@@ -14,16 +14,18 @@
                     <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
                     {{group.name}}
                     <br><br>
+                    <!--marquee width="100%" scrolldelay="100" scrollamount="5" direction="left" loop="infinite"><span>Pago Mensual 
+                    {{group.pagoMensual}}</span></marquee-->
                     <span class="mensual">Pago Mensual 
                     {{group.pagoMensual}}</span>
                 </ion-item>
-                <ion-item ng-repeat="item in group.members"
+                <ion-item ng-repeat="item in group.members" 
                           class="item-accordion"
                           ng-show="isGroupShown(group)">
                     <div class="row">
                         <div class="col col-75">{{item.name}}:</div>
                         <div class="col">{{item.quantity}}</div>
-                    </div>
+                    </div>                    
                 </ion-item>
             </div>
         </ion-list>
@@ -47,24 +49,6 @@
         </ion-list>
         <ion-list>
             <div ng-repeat="group in grupoScotiabank">
-                <ion-item class="item item-outline item-positive text-center" ng-click="toggleGroup(group)"
-                          ng-class="{active: isGroupShown(group)}">
-                    <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
-                    {{group.name}}
-                    <br><br>
-                    <span class="mensual">Pago Mensual 
-                    {{group.pagoMensual}}</span>
-                </ion-item>
-                <ion-item ng-repeat="item in group.members" class="item-accordion" ng-show="isGroupShown(group)">
-                    <div class="row">
-                        <div class="col col-75">{{item.name}}:</div>
-                        <div class="col">{{item.quantity}}</div>
-                    </div>
-                </ion-item>
-            </div>
-        </ion-list>
-        <ion-list>
-            <div ng-repeat="group in grupoBancomer">
                 <ion-item class="item item-outline item-positive text-center" ng-click="toggleGroup(group)"
                           ng-class="{active: isGroupShown(group)}">
                     <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
