@@ -1,106 +1,124 @@
-(function () {
-    var app = angular.module('app', ['ionic', 'ngCordova', 'ngMaterial','app.controllers', 'app.services']);
+(
+	function() {
+		var app = angular.module('app', ['ionic', 'ngCordova', 'angularMoment', 'ngOpenFB', 'ngMaterial', 'app.controllers', 'app.services']);
 
-    app.run(function ($ionicPlatform) {
-        $ionicPlatform.ready(function () {
-            if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-            }
-            if (window.StatusBar) {
-                StatusBar.styleLightContent();
-            }
-        });
-    })
+		app.run(function($ionicPlatform, ngFB) {
+			ngFB.init({
+				appId : '1639952819598830'
+			});
 
-    app.config(function ($stateProvider, $urlRouterProvider) {
-        $stateProvider.state('dash', {
-            url: '/dash',
-            views: {
-                'tab-dash': {
-                    templateUrl: 'templates/tab-prospecto.html',
-                    controller: 'DashCtrl'
-                }
-            }
-        })
+			$ionicPlatform.ready(function() {
+				if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+					cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+				}
+				if (window.StatusBar) {
+					StatusBar.styleLightContent();
+				}
+			});
+		})
 
-        $stateProvider.state('resultado15Fijo', {
-            url: '/resultado/:valor/:selMens/:selPlazo/:selEstado',
-            views: {
-                'tab-simular': {
-                    templateUrl: 'templates/tab-resultado15Fijo.html',
-                    controller: 'Res15FijoCtrl'
-                }
-            }
-        })
+		app.config(function($stateProvider, $urlRouterProvider) {
+			$stateProvider
+			//Login
+			.state('login', {
+				url : '/login',
+				templateUrl : 'login.html',
+				controller : 'LoginCtrl'
+			})
+            // Aplicación
+            .state('app', {
+				url : '/app',
+				abstract : true,
+				templateUrl : 'principal.html'
+            })
+            // Pestañas
+            .state('app.tabs', {
+				url : '/tab',
+				views : {
+				    'principal': {
+						templateUrl : 'templates/tabs.html'
+					}
+				}
+			}).state('app.tabs.dash', {
+				url : '/dash',
+				views : {
+					'tab-dash' : {
+						templateUrl : 'templates/tab-prospecto.html',
+						controller : 'DashCtrl'
+					}
+				}
+			}).state('app.tabs.simular', {
+				url : '/simular',
+				views : {
+					'tab-simular' : {
+						templateUrl : 'templates/tab-simulador.html',
+						controller : 'SimulaCtrl'
+					}
+				}
+			}).state('app.tabs.resultado15Fijo', {
+				url : '/resultado/:valor/:selMens/:selPlazo/:selEstado',
+				views : {
+					'tab-simular' : {
+						templateUrl : 'templates/tab-resultado15Fijo.html',
+						controller : 'Res15FijoCtrl'
+					}
+				}
+			}).state('app.tabs.resultado15Creciente', {
+				url : '/resultado/:valor/:selMens/:selPlazo/:selEstado',
+				views : {
+					'tab-simular' : {
+						templateUrl : 'templates/tab-resultado15Creciente.html',
+						controller : 'Res15CrecienteCtrl'
+					}
+				}
+			}).state('app.tabs.resultado20Fijo', {
+				url : '/resultado/:valor/:selMens/:selPlazo/:selEstado',
+				views : {
+					'tab-simular' : {
+						templateUrl : 'templates/tab-resultado20Fijo.html',
+						controller : 'Res20FijoCtrl'
+					}
+				}
+			}).state('app.tabs.resultado20Creciente', {
+				url : '/resultado/:valor/:selMens/:selPlazo/:selEstado',
+				views : {
+					'tab-simular' : {
+						templateUrl : 'templates/tab-resultado20Creciente.html',
+						controller : 'Res20CrecienteCtrl'
+					}
+				}
+			}).state('app.tabs.historial', {
+				url : '/historial',
+				views : {
+					'tab-historial' : {
+						templateUrl : 'templates/historial.html',
+						controller : 'HistoryCtrl'
+					}
+				}
+			}).state('app.tabs.historial.lista', {
+			    url: '/historial/:fecha',
+			    views: {
+			        'tab-historial': {
+			            templateUrl: 'templates/historial.html',
+			            controller: 'HistoryCtrl'
+			        }
+			    }
+			}).state('app.tabs.perfil', {
+				url : '/perfil',
+				views : {
+					'tab-perfil' : {
+						templateUrl : 'templates/perfil.html'
+					}
+				}
+			}).state('app.tabs.aviso', {
+				url : '/aviso',
+				views : {
+					'tab-aviso' : {
+						templateUrl : 'templates/aviso.html'
+					}
+				}
+			});
 
-        $stateProvider.state('resultado15Creciente', {
-            url: '/resultado/:valor/:selMens/:selPlazo/:selEstado',
-            views: {
-                'tab-simular': {
-                    templateUrl: 'templates/tab-resultado15Creciente.html',
-                    controller: 'Res15CrecienteCtrl'
-                }
-            }
-        })
-
-        $stateProvider.state('resultado20Fijo', {
-            url: '/resultado/:valor/:selMens/:selPlazo/:selEstado',
-            views: {
-                'tab-simular': {
-                    templateUrl: 'templates/tab-resultado20Fijo.html',
-                    controller: 'Res20FijoCtrl'
-                }
-            }
-        })
-
-        $stateProvider.state('resultado20Creciente', {
-            url: '/resultado/:valor/:selMens/:selPlazo/:selEstado',
-            views: {
-                'tab-simular': {
-                    templateUrl: 'templates/tab-resultado20Creciente.html',
-                    controller: 'Res20CrecienteCtrl'
-                }
-            }
-        })
-
-       $stateProvider.state('simular', {
-           url: '/simular',
-           views: {
-               'tab-simular': {
-                   templateUrl: 'templates/tab-simulador.html',
-                   controller: 'SimulaCtrl'
-               }
-           }
-       })
-
-        $stateProvider.state('historial', {
-            url: '/historial',
-            views: {
-                'tab-historial': {
-                    templateUrl: 'templates/historial.html'
-                }
-            }
-        })
-
-        $stateProvider.state('perfil', {
-            url: '/perfil',
-            views: {
-                'tab-perfil': {
-                    templateUrl: 'templates/perfil.html'
-                }
-            }
-        })
-
-        $stateProvider.state('aviso', {
-            url: '/aviso',
-            views: {
-                'tab-aviso': {
-                    templateUrl: 'templates/aviso.html'
-                }
-            }
-        })
-
-
-        $urlRouterProvider.otherwise('/dash');
-    });
-})();
+			$urlRouterProvider.otherwise('/login');
+		});
+	})();

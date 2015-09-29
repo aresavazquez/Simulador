@@ -11,13 +11,11 @@
     <link href="css/index.css" rel="stylesheet" />
     <link href="css/museo/museo.css" rel="stylesheet">
 
-    <script src="js/openfb.js"></script>
-    <script src="js/ngopenfb.js"></script>
-
     <script src="http://code.ionicframework.com/1.0.0-rc.5/js/ionic.bundle.min.js"></script>
     <script src="js/ng-cordova.min.js"></script>
     <script src="cordova.js"></script>
-
+    <script src="js/components/moment/moment.js"></script>
+    <script src="js/components/angular-moment/angular-moment.js"></script>
     <script src="http://cdn.jsdelivr.net/hammerjs/2.0.4/hammer.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-aria.min.js"></script>
 
@@ -27,89 +25,17 @@
     <script src="js/ngopenfb.js"></script>
 
     <script src="js/app.js"></script>
-    <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/creciente15Controller.js"></script>
+    <script src="js/creciente20Controller.js"></script>
+    <script src="js/fijo15Controller.js"></script>
+    <script src="js/fijo20Controller.js"></script>
+    <script src="js/simulaController.js"></script>
+    <script src="js/historialController.js"></script>
+
 </head>
 <body ng-app="app">
-    <ion-side-menus>
-        <ion-side-menu side="left" enable-menu-with-back-views="false">
-            <ion-header-bar class="bar-calm">
-                <h1 class="title">Menu</h1>
-            </ion-header-bar>
-            <ion-content>
-                <ion-list>
-                    <ion-item menu-close href="#/simular">
-                        Simulador
-                        <i class="ion-ios-arrow-right"></i>
-                    </ion-item>
-                    <ion-item menu-close href="#/dash">
-                        Prospecto
-                        <i class="ion-ios-arrow-right"></i>
-                    </ion-item>
-                    <ion-item menu-close href="#/historial">
-                        Historial
-                        <i class="ion-ios-arrow-right"></i>
-                    </ion-item>
-                    <ion-item menu-close href="#/perfil">
-                        Perfil
-                        <i class="ion-ios-arrow-right"></i>
-                    </ion-item>
-                    <ion-item menu-close href="#/aviso">
-                        Aviso de privacidad
-                        <i class="ion-ios-arrow-right"></i>
-                    </ion-item>
-                </ion-list>
-            </ion-content>
-        </ion-side-menu>
-
-        <ion-side-menu-content>
-            <ion-nav-bar class="bar-calm">
-                <ion-nav-buttons side="left">
-                    <button menu-toggle="left"
-                            class="button button-icon button-clear ion-navicon"></button>
-                </ion-nav-buttons>
-                <ion-nav-buttons side="right">
-                    <img src="./img/logoWhite.png" class="logoWhite">
-                </ion-nav-buttons>
-                <ion-nav-back-button></ion-nav-back-button>
-            </ion-nav-bar>
-            <ion-tabs class="tabs-icon-top tabs-stable">
-
-
-                <ion-tab title="Simulador" icon-off="ion-ios-calculator-outline" icon-on="ion-calculator" href="#/simular">
-                    <ion-nav-view name="tab-simular"></ion-nav-view>
-                </ion-tab>
-
-                <ion-tab title="Prospecto" icon-off="ion-ios-person-outline" icon-on="ion-person-add" href="#/dash">
-                    <ion-nav-view name="tab-dash"></ion-nav-view>
-                </ion-tab>
-
-                <ion-tab title="Historial" icon-off="ion-ios-calendar-outline" icon-on="ion-ios-calendar" href="#/historial">
-                    <ion-nav-view name="tab-historial"></ion-nav-view>
-                </ion-tab>
-
-                <ion-tab title="Perfil" icon-off="ion-ios-compose-outline" icon-on="ion-ios-compose" href="#/perfil">
-                    <ion-nav-view name="tab-perfil"></ion-nav-view>
-                </ion-tab>
-
-                <ion-tab title="Aviso" icon-off="ion-ios-information-outline" icon-on="ion-ios-information" href="#/aviso">
-                    <ion-nav-view name="tab-aviso"></ion-nav-view>
-                </ion-tab>
-
-
-            </ion-tabs>
-        </ion-side-menu-content>
-
-        <!--<ion-side-menu side="right">
-            <ion-header-bar class="bar-calm">
-                <h1 class="title">Messages</h1>
-            </ion-header-bar>
-            <ion-content>
-                Sin mensajes
-            </ion-content>
-        </ion-side-menu>-->
-        <div class="bar bar-footer bar-balanced">
-        </div>
-    </ion-side-menus>
+    <ion-nav-view></ion-nav-view>
 </body>
 </html>

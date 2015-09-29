@@ -187,3 +187,79 @@ li{
 .item.item-text-wrap p{
     text-align: justify;
 }
+/*/////////////perfil////////////*/
+.name{
+    text-align: left;
+    margin-top: 30px;
+}
+a.item.item-icon-left.activated{
+    background: #DBDBDB;
+}
+
+.item-avatar > img:first-child{
+    max-width: 100px;
+    max-height: 100px;
+    top: 10px;
+}
+.item-avatar{
+    padding-left: 135px;
+    min-height: 95px;
+    padding-bottom: 30px;
+    padding-top: 45px;
+}
+label.search{
+    pointer-events: visible;
+    padding-bottom: 10px;
+}
+.card .item.item-input input, .list-inset .item.item-input input, .padding > .list .item.item-input input, .padding-horizontal > .list .item.item-input input {
+    padding-right: 44px;
+    padding-bottom: 15px;
+}
+.placeholder-icon:first-child {
+    padding-bottom: 15px;
+}
+/*////////////////login/////////*/
+.item.item-input.item-stacked-label {
+    pointer-events: visible;
+    padding-left: 0px;
+    width: 90%;
+    margin: 0 auto 20px;
+    border-bottom: 1px solid #1dafec;
+}
+.item-stacked-label .input-label, .item-stacked-label .icon{
+    color: #1dafec;
+}
+.list.login{
+    margin: 20px 0 50px;
+}
+.logoImg {
+    width: 100px;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    margin-top: 0;
+}
+.button.button-positive.save{
+    background: #1dafec;
+    margin-bottom: 25px;
+}
+button.face{
+    background: #4867aa !important;
+}
+button{
+    box-shadow: 0px 6px 0px 0px rgba(0,0,0,0.15);
+}
+.ion-social-facebook{
+    font-size: 30px;
+    position: absolute;
+    top: 5px;
+    left: 40px;
+    border-radius: 10px;
+} 
+span.mensual{
+    margin-left: 15px;
+    color: #0dcf40;
+    font-size: 25px;
+}
+
+
