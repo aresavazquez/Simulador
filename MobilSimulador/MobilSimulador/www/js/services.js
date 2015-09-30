@@ -54,7 +54,6 @@
 
     serv.factory('Prospectos', function () {
         var prospectos = angular.fromJson(window.localStorage['cgoProspects'] || '[]');
-       
         function persist() {
             window.localStorage['cgoProspects'] = angular.toJson(prospectos);
         }
@@ -454,7 +453,20 @@
             }
         };
     });
-
+    serv.factory('SendMail', ['$http', function ($http) {
+        return {
+            mandar: function (datos) {
+                var variable = JSON.stringify(datos)
+                var objeto = variable.replace(/:/g, "_");
+                $http.post('http://localhost:13426/MailSvc.svc/Web/SendMail/' + objeto)
+                    .then(function (res) {
+                    return res.data;
+                }, function (err) {
+                    console.error('error', err);
+                });
+            }
+        };
+    }]);
     serv.factory('Estados', function () {
         var estados = [
               { id: 0, nombre: 'ESTADO' },

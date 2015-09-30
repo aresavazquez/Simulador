@@ -2,15 +2,13 @@
     <ion-content class="padding">
     	<div class="list">
 		    <a class="item item-avatar" href="#">
-		    <img src="./img/cara2.png" class="avatar">
-		    <h2 class="name">Nombre</h2>
-		    <p>Estado</p>
+            <img src="http://graph.facebook.com/{{user.id}}/picture" class="avatar"/>
+		    <h2 class="name">{{user.name}}</h2>
 		    </a>
 		</div>
-		<button class="button button-block button-positive face">
-			<i class="ion-social-facebook"></i>
+		<md-button class="button button-block button-positive" ng-click="share()">
   			Compartir en facebook
-		</button>    
+		</md-button>    
     </ion-content>
     <div class="bar bar-footer bar-balanced">
 	</div>

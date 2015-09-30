@@ -13,6 +13,9 @@
                           ng-class="{active: isGroupShown(group)}">
                     <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
                     {{group.name}}
+                    <br><br>
+                    <span class="mensual">Pago Mensual 
+                    {{group.pagoMensual}}</span>
                 </ion-item>
                 <ion-item ng-repeat="item in group.members"
                           class="item-accordion"
@@ -31,6 +34,9 @@
                           ng-class="{active: isGroupShown(group)}">
                     <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
                     {{group.name}}
+                    <br><br>
+                    <span class="mensual">Pago Mensual 
+                    {{group.pagoMensual}}</span>
                 </ion-item>
                 <ion-item ng-repeat="item in group.members" class="item-accordion" ng-show="isGroupShown(group)">
                     <div class="row">
@@ -46,6 +52,9 @@
                           ng-class="{active: isGroupShown(group)}">
                     <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
                     {{group.name}}
+                    <br><br>
+                    <span class="mensual">Pago Mensual 
+                    {{group.pagoMensual}}</span>
                 </ion-item>
                 <ion-item ng-repeat="item in group.members" class="item-accordion" ng-show="isGroupShown(group)">
                     <div class="row">
@@ -61,6 +70,9 @@
                           ng-class="{active: isGroupShown(group)}">
                     <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
                     {{group.name}}
+                    <br><br>
+                    <span class="mensual">Pago Mensual 
+                    {{group.pagoMensual}}</span>
                 </ion-item>
                 <ion-item ng-repeat="item in group.members" class="item-accordion" ng-show="isGroupShown(group)">
                     <div class="row">
@@ -76,6 +88,9 @@
                           ng-class="{active: isGroupShown(group)}">
                     <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
                     {{group.name}}
+                    <br><br>
+                    <span class="mensual">Pago Mensual 
+                    {{group.pagoMensual}}</span>
                 </ion-item>
                 <ion-item ng-repeat="item in group.members" class="item-accordion" ng-show="isGroupShown(group)">
                     <div class="row">
@@ -91,6 +106,9 @@
                           ng-class="{active: isGroupShown(group)}">
                     <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
                     {{group.name}}
+                    <br><br>
+                    <span class="mensual">Pago Mensual 
+                    {{group.pagoMensual}}</span>
                 </ion-item>
                 <ion-item ng-repeat="item in group.members" class="item-accordion" ng-show="isGroupShown(group)">
                     <div class="row">
@@ -106,6 +124,9 @@
                           ng-class="{active: isGroupShown(group)}">
                     <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
                     {{group.name}}
+                    <br><br>
+                    <span class="mensual">Pago Mensual 
+                    {{group.pagoMensual}}</span>
                 </ion-item>
                 <ion-item ng-repeat="item in group.members" class="item-accordion" ng-show="isGroupShown(group)">
                     <div class="row">
@@ -115,5 +136,9 @@
                 </ion-item>
             </div>
         </ion-list>
+
+        <md-button class="button button-positive" ng-click="mandarCorreo()">
+            Mandar mail<i class="ion-email"></i>
+        </md-button>
     </ion-content>
 </ion-view>

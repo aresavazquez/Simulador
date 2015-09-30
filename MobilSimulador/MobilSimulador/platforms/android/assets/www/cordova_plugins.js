@@ -15,13 +15,21 @@ module.exports = [
             "plugin.printer",
             "cordova.plugins.printer"
         ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.inappbrowser/www/inappbrowser.js",
+        "id": "org.apache.cordova.inappbrowser.inappbrowser",
+        "clobbers": [
+            "window.open"
+        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
     "de.appplant.cordova.plugin.email-composer": "0.8.3dev",
-    "de.appplant.cordova.plugin.printer": "0.7.1"
+    "de.appplant.cordova.plugin.printer": "0.7.1",
+    "org.apache.cordova.inappbrowser": "0.6.0"
 }
 // BOTTOM OF METADATA
 });

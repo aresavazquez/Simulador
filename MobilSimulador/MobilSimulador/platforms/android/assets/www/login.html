@@ -33,7 +33,6 @@
     <script src="js/fijo20Controller.js"></script>
     <script src="js/simulaController.js"></script>
     <script src="js/historialController.js"></script>
-    
 </head>
 <body ng-app="app">
     <ion-view>
@@ -42,15 +41,15 @@
             <div class="list login">
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">Nombre</span>
-                    <input type="text" placeholder="-">
+                    <input type="text" placeholder="-" ng-model="data.nombre">
                  </label>
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">Apellido</span>
-                    <input type="text" placeholder="-">
+                    <input type="text" placeholder="-" ng-model="data.apellido">
                 </label>
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">Email</span>
-                    <input type="text" placeholder="-">
+                    <input type="text" placeholder="-" ng-model="data.correo">
                 </label>
             </div>
             <button class="button button-positive save" ng-click="entrar()">

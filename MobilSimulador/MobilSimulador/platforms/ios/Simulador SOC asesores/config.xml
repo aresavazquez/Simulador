@@ -56,4 +56,7 @@
     <feature name="Printer">
         <param name="ios-package" value="APPPrinter" />
     </feature>
+    <feature name="InAppBrowser">
+        <param name="ios-package" value="CDVInAppBrowser" />
+    </feature>
 </widget>

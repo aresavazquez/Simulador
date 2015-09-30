@@ -43,6 +43,7 @@
 		A050C16DB4A9490B95CF1433 /* APPEmailComposerImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C165EECF04D4230A7B47EFC /* APPEmailComposerImpl.m */; };
 		89858EAC3DDE4231B8E46F95 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B4A4228265443D8040ABC2 /* MessageUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F2DADC8429DD42E389DC51F3 /* APPPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = 651E59009CE04BD2B5C70BB3 /* APPPrinter.m */; };
+		39C10EEC4A7B4821869A973E /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B0DE635014FB9809BDBD7 /* CDVInAppBrowser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,8 @@
 		E1B4A4228265443D8040ABC2 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "MessageUI.framework"; path = "System/Library/Frameworks/MessageUI.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 		651E59009CE04BD2B5C70BB3 /* APPPrinter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "APPPrinter.m"; path = "de.appplant.cordova.plugin.printer/APPPrinter.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		577A07EE190B448D859598FC /* APPPrinter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "APPPrinter.h"; path = "de.appplant.cordova.plugin.printer/APPPrinter.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		CD2B0DE635014FB9809BDBD7 /* CDVInAppBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVInAppBrowser.m"; path = "org.apache.cordova.inappbrowser/CDVInAppBrowser.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		87B13332D5CB46499A813826 /* CDVInAppBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVInAppBrowser.h"; path = "org.apache.cordova.inappbrowser/CDVInAppBrowser.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +224,8 @@
 				AB50F96D353245CE8EAB54BE /* APPEmailComposerImpl.h */,
 				651E59009CE04BD2B5C70BB3 /* APPPrinter.m */,
 				577A07EE190B448D859598FC /* APPPrinter.h */,
+				CD2B0DE635014FB9809BDBD7 /* CDVInAppBrowser.m */,
+				87B13332D5CB46499A813826 /* CDVInAppBrowser.h */,
 			);
 			name = Plugins;
 			path = "Simulador SOC asesores/Plugins";
@@ -408,6 +413,7 @@
 				CA81BDCD1CB94CECAD310A93 /* APPEmailComposer.m in Sources */,
 				A050C16DB4A9490B95CF1433 /* APPEmailComposerImpl.m in Sources */,
 				F2DADC8429DD42E389DC51F3 /* APPPrinter.m in Sources */,
+				39C10EEC4A7B4821869A973E /* CDVInAppBrowser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

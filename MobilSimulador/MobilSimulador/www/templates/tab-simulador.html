@@ -1,9 +1,9 @@
-﻿<ion-view view-title="Simulador" class="simular">
+﻿<ion-view view-title="Simulador" class="simular" cache-view="false">
     <ion-content class="padding">
         <ion-list>
             <ion-item class="valor">
                 <div class="group">
-                    <input type="number" ng-model="data.valor" required>
+                    <input type="text" ng-model="data.valor" required>
                     <span class="highlight"></span>
                     <label>Valor del inmueble</label>
                 </div>
@@ -40,11 +40,11 @@
                     Calcular
                 </md-button>
             </ion-item>
-            <div class="card simulador">
+            <div class="card">
                 <ul class="list checkAviso">
                     <li class="item item-checkbox">
                         <label class="checkbox">
-                            <input type="checkbox" class="acepto">
+                            <input type="checkbox" class="acepto" ng-model="data.acepto">
                         </label>
                         Acepto el Aviso de Privacidad.
                     </li>

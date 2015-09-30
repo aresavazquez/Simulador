@@ -2,25 +2,39 @@
     var control = angular.module('app.controllers', ['ngOpenFB']);
 
     control.controller('LoginCtrl', function ($scope, $state, $ionicModal, $timeout, ngFB) {
-        $scope.entrar = function (){
-            $state.go("app.tabs");
-        };    
+        $scope.data = {
+            nombre: '',
+            apellido: '',
+            correo: '',
+            foto: ''
+        };
+
+        $scope.entrar = function () {
+            window.localStorage['usuario'] =JSON.stringify($scope.data);
+            $state.go("app.tabs.dash");
+        };
+
         $scope.fbLogin = function () {
-            //$state.go("app.tabs");
             ngFB.login({
                 scope: 'email,user_likes'
             }).then(function (response) {
                 if (response.status === 'connected') {
+                    localStorage.status = "conectado";
+                    localStorage.accessToken = response.access_token;
                     console.log('Facebook login succeeded');
-                    $scope.closeLogin();
+                    // $scope.closeLogin();
+                    $state.go("app.tabs.dash");
                 } else {
+                    localStorage.status = "deconectado"
                     alert('Facebook login failed');
                 }
             });
         };
     });
 
-    control.controller('DashCtrl', function ($scope, Estados, Plazos, Mensualidades, $cordovaEmailComposer, $cordovaPrinter, Simula, Calculos, Avaluos, GastosNotariales, Prospectos) {
+    control.controller('DashCtrl', function ($scope, $state, Estados, Plazos, Mensualidades,
+        $cordovaEmailComposer, $cordovaPrinter, Simula, Calculos,
+        Avaluos, GastosNotariales, Prospectos) {
         $scope.data = {
             valorInmueble: null,
             selEstado: 0,
@@ -47,7 +61,9 @@
             var now = new Date();
             $scope.data.id = now.getTime().toString();
             $scope.data.fecha = now.getDate() + '/' + meses[now.getMonth()] + '/' + now.getFullYear();
-            Prospectos.add($scope.data);
+            data = angular.copy($scope.data);
+            Prospectos.add(data);
+            $state.go("app.tabs.historial");
         };
     });
 

@@ -25,7 +25,8 @@
                             valor: prospect.valorInmueble,
                             selMens: prospect.selMens,
                             selEstado: prospect.selEstado,
-                            selPlazo: prospect.selPlazo
+                            selPlazo: prospect.selPlazo,
+                            idHistorial: prospect.id
                         });
                     }
                 }
@@ -38,7 +39,8 @@
                             valor: prospect.valorInmueble,
                             selMens: prospect.selMens,
                             selEstado: prospect.selEstado,
-                            selPlazo: prospect.selPlazo
+                            selPlazo: prospect.selPlazo,
+                            idHistorial: prospect.id
                         });
                     }
                 }
@@ -56,7 +58,8 @@
                             valor: prospect.valorInmueble,
                             selMens: prospect.selMens,
                             selEstado: prospect.selEstado,
-                            selPlazo: prospect.selPlazo
+                            selPlazo: prospect.selPlazo,
+                            idHistorial: prospect.id
                         });
                     }
                 }
@@ -69,7 +72,8 @@
                             valor: prospect.valorInmueble,
                             selMens: prospect.selMens,
                             selEstado: prospect.selEstado,
-                            selPlazo: prospect.selPlazo
+                            selPlazo: prospect.selPlazo,
+                            idHistorial: prospect.id
                         });
                     }
                 }

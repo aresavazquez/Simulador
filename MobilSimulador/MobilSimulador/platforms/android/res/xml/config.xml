@@ -7,6 +7,9 @@
     <feature name="Printer">
         <param name="android-package" value="de.appplant.cordova.plugin.printer.Printer" />
     </feature>
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    </feature>
     <icon density="ldpi" src="resources\android\icon\drawable-ldpi-icon.png" />
     <icon density="mdpi" src="resources\android\icon\drawable-mdpi-icon.png" />
     <icon density="hdpi" src="resources\android\icon\drawable-hdpi-icon.png" />
@@ -45,4 +48,9 @@
     <preference name="android-minSdkVersion" value="18" />
     <preference name="android-maxSdkVersion" value="21" />
     <preference name="android-targetSdkVersion" value="18" />
+    <preference name="KeepRunning" value="True" />
+    <preference name="ShowTitle" value="False" />
+    <preference name="InAppBrowserStorageEnabled" value="True" />
+    <preference name="SuppressesIncrementalRendering" value="False" />
+    <vs:plugin name="org.apache.cordova.inappbrowser" version="0.6.0" />
 </widget>

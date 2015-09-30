@@ -40,9 +40,10 @@ select{
     color: #fff;
 }
 .button.button-positive {
-    border: none;
-    background-color: #41546e;
+    background: #1dafec;
     color: #fff;
+    box-shadow: 0px 6px 0px 0px rgba(0,0,0,0.15);
+    border: none;
 }
 .button.button-positive.active, .button.button-positive.activated{
 	border: none;
@@ -153,11 +154,11 @@ li{
     width: 100%;
 }
 .popup-container.active .popup{
-    background: #C7C7C7;
+    background: #41546e;
 }
 .item.active.item-positive{
     border: none;
-    background-color: #92A6B5;
+    background-color: #25476E;
     color: #fff;
 }
 .padding.resultado{
@@ -203,7 +204,7 @@ a.item.item-icon-left.activated{
 }
 .item-avatar{
     padding-left: 135px;
-    min-height: 95px;
+    min-height: 115px;
     padding-bottom: 30px;
     padding-top: 45px;
 }
@@ -258,8 +259,42 @@ button{
 } 
 span.mensual{
     margin-left: 15px;
-    color: #0dcf40;
+    color: #90A4B2;
     font-size: 25px;
 }
+.popup-title {
+    color: #fff;
+    font-size: 25px;
+}
+.popup-body span{
+    font-size: 18px;
+}
+.button.button-positive.mail{
+    background: #1dafec;
+    color: #fff;
+    box-shadow: 0px 6px 0px 0px rgba(0,0,0,0.15);
+    border: none;
+    width: 90%;
+    margin: 40px auto;
+    display: block;
+    height: 65px;
+    border-radius: 10px;
+    font-size: 25px;
+}
+.ion-email{
+    font-size: 50px;
+    position: absolute;
+    top: 7px;
+    left: 75px;
+}
+.popup-body input{
+    color: #fff !important;
+}
+.list:last-child{
+    margin-bottom: 10px;
+}
+
+
+
 
 
