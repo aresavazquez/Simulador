@@ -11,7 +11,7 @@
             return groups[group];
         })
     };
-    function calcula(prospect, $state) {
+    function calcula(prospect, $state, $ionicPopup) {
         if (prospect.valorInmueble === null) {
             muestraMensaje("Error", "No es posible realizar el c&aacute;lculo debido a que no ha ingresado un valor del inmueble");
         } else {
@@ -87,12 +87,12 @@
         }
     }
 
-    control.controller('HistoryListCtrl', function ($scope, $state, $stateParams, Prospectos) {
+    control.controller('HistoryListCtrl', function ($scope, $state, $stateParams, Prospectos, $ionicPopup) {
         $scope.prospectos = Prospectos.getByDate($stateParams.fec);
 
         $scope.resultado = function (id) {
             prospect = Prospectos.get(id);
-            calcula(prospect, $state);
+            calcula(prospect, $state, $ionicPopup);
         };
 
     });
@@ -117,12 +117,12 @@
         };
     });
 
-    control.controller('HistoryCtrl', function ($scope, $state, Prospectos) {
+    control.controller('HistoryCtrl', function ($scope, $state, Prospectos, $ionicPopup) {
         $scope.irA = function (prospecto) {
             if (prospecto[0] != undefined) {
                 $state.go("app.tabs.hisotryList", { fec: prospecto[0].fecha })
             } else {
-                calcula(prospecto, $state);
+                calcula(prospecto, $state, $ionicPopup);
             }
         };
 
@@ -131,7 +131,14 @@
             return [item.fecha];
         });;
     });
+    function muestraMensaje(titulo, mensaje, $ionicPopup) {
+        var alertPopup = $ionicPopup.alert({
+            title: titulo,
+            template: mensaje
+        });
 
+        alertPopup.then(function (res) {
 
-
+        });
+    }
 })();

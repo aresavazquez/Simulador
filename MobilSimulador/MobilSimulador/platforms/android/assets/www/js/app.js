@@ -136,15 +136,17 @@
                         controller: 'Res20CrecienteCtrl'
                     }
                 }
-            }).state('app.tabs.perfil', {
-                url: '/perfil',
-                views: {
-                    'tab-perfil': {
-                        templateUrl: 'templates/perfil.html',
-                        controller: 'PerfilCtrl'
-                    }
-                }
-            }).state('app.tabs.aviso', {
+            })
+            //.state('app.tabs.perfil', {
+            //    url: '/perfil',
+            //    views: {
+            //        'tab-perfil': {
+            //            templateUrl: 'templates/perfil.html',
+            //            controller: 'PerfilCtrl'
+            //        }
+            //    }
+            //})
+            .state('app.tabs.aviso', {
                 url: '/aviso',
                 views: {
                     'tab-aviso': {

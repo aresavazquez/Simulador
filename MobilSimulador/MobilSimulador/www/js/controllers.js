@@ -1,7 +1,16 @@
 (function () {
     var control = angular.module('app.controllers', ['ngOpenFB']);
+    function muestraMensaje(titulo, mensaje, $ionicPopup) {
+        var alertPopup = $ionicPopup.alert({
+            title: titulo,
+            template: mensaje
+        });
 
-    control.controller('LoginCtrl', function ($scope, $state, $ionicModal, $timeout, ngFB) {
+        alertPopup.then(function (res) {
+
+        });
+    }
+    control.controller('LoginCtrl', function ($scope, $state, $ionicModal, $ionicPopup, $timeout, ngFB) {
         $scope.data = {
             nombre: '',
             apellido: '',
@@ -10,8 +19,15 @@
         };
 
         $scope.entrar = function () {
-            window.localStorage['usuario'] =JSON.stringify($scope.data);
-            $state.go("app.tabs.dash");
+            if($scope.data.nombre === '' ||
+                $scope.data.apellido === '' ||
+                $scope.data.correo === '') {
+                muestraMensaje("Error", "Debe rellenar los campos de registro para continuar", $ionicPopup);
+            } else {
+                window.localStorage['usuario'] = JSON.stringify($scope.data);
+                $state.go("app.tabs.dash");
+            }
+            
         };
 
         $scope.fbLogin = function () {

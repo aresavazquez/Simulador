@@ -1,17 +1,17 @@
 <ion-view view-title="Perfil">
     <ion-content class="padding">
-    	<div class="list">
-		    <a class="item item-avatar" href="#">
-            <!--img src="http://graph.facebook.com/{{user.id}}/picture" class="avatar"/-->
-            <img src="{{foto}}" class="avatar"/>
-		    <h2 class="name">{{user.name}}</h2>
-		    </a>
-		</div>
-		<md-button class="button button-block button-positive face" ng-click="share()">
-			<i class="ion-social-facebook"></i>
-  			Compartir en facebook
-		</md-button>    
+        <img ng-src="{{foto}}" class="avatar" />
+        <!--<img src="http://graph.facebook.com/{{user.id}}/picture" class="avatar" />-->
+        <h2 class="name">{{user.name}}</h2>
+
+        <md-button class="button button-outline button-positive" ng-click="tomarFoto()">
+            Tomar foto
+        </md-button>
+
+        <!--md-button class="button button-block button-positive" ng-click="share()">
+            Compartir en facebook
+        </md-button-->
     </ion-content>
     <div class="bar bar-footer bar-balanced">
-	</div>
+    </div>
 </ion-view>

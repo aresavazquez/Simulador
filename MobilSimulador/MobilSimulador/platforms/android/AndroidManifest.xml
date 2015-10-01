@@ -12,4 +12,5 @@
     </application>
     <uses-sdk android:maxSdkVersion="21" android:minSdkVersion="18" android:targetSdkVersion="18" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>

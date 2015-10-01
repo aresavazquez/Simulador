@@ -54,7 +54,6 @@
 
     serv.factory('Prospectos', function () {
         var prospectos = angular.fromJson(window.localStorage['cgoProspects'] || '[]');
-       
         function persist() {
             window.localStorage['cgoProspects'] = angular.toJson(prospectos);
         }

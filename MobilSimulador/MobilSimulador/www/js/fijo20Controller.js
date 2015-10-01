@@ -12,6 +12,7 @@
             correo: '',
             telefono: '',
         };
+        $scope.cancelar = false;
         $scope.data.valorInmueble = $state.params.valor;
         $scope.data.selEstado = $state.params.selEstado;
         $scope.data.selMens = $state.params.selMens;
@@ -40,18 +41,32 @@
                     subTitle: '',
                     scope: $scope,
                     buttons: [
-                      { text: 'Cancelar' },
+                      {
+                          text: 'Cancelar',
+                          onTap: function (e) {
+                              $scope.cancelar = true;
+                          }
+                      },
                       {
                           text: '<b>Mandar</b>',
                           type: 'button-positive',
                           onTap: function (e) {
+                              $scope.cancelar = false;
                               return $scope.data;
                           }
                       }
                     ]
                 });
                 myPopup.then(function (res) {
-                    SendMail.mandar($scope.data);
+                    if ($scope.cancelar === false) {
+                        SendMail.mandar($scope.data);
+                        $ionicPopup.alert({
+                            title: 'Correcto',
+                            template: 'Su correo se ha enviado correctamente'
+                        }).then(function (res) {
+                            console.log('');
+                        });
+                    }
                 });
             } else {
                 prospecto = Prospectos.get($state.params.idHistorial);
@@ -64,6 +79,12 @@
                 $scope.data.telefono = prospecto.telefono;
                 $scope.data.id = prospecto.id;
                 SendMail.mandar($scope.data);
+                $ionicPopup.alert({
+                    title: 'Correcto',
+                    template: 'Su correo se ha enviado correctamente'
+                }).then(function (res) {
+                    console.log('');
+                });
             }
         };
         //Banorte

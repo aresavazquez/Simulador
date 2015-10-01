@@ -209,7 +209,7 @@ md-select {
 [md-ink-ripple] {
     position: relative;
 }
-.card {
+.card.prospecto{
     padding-top: 30px;
 }
 
