@@ -1,17 +1,24 @@
-<!--
-Create tabs with an icon and label, using the tabs-stable style.
-Each tab's child <ion-nav-view> directive will have its own
-navigation history that also transitions its views in and out.
--->
-<ion-tabs class="tabs-icon-top tabs-stable">
-
-    <ion-tab title="Simulador" icon-off="ion-ios-calculator-outline" icon-on="ion-calculator" href="#/tab/simular">
-        <ion-nav-view name="tab-simular"></ion-nav-view>
-    </ion-tab>
-
-  <!-- Dashboard Tab -->
-  <ion-tab title="Prospecto" icon-off="ion-ios-person-outline" icon-on="ion-person-add" href="#/tab/dash">
-    <ion-nav-view name="tab-dash"></ion-nav-view>
-  </ion-tab>
-
-</ion-tabs>
+<ion-view>
+		<ion-tabs class="tabs-icon-top tabs-stable">
+			<ion-tab title="Prospecto" icon-off="ion-ios-person-outline" 
+                     icon-on="ion-person-add" ui-sref="app.tabs.dash">
+				<ion-nav-view name="tab-dash"></ion-nav-view>
+			</ion-tab>
+			<ion-tab title="Simulador" icon-off="ion-ios-calculator-outline"
+                      icon-on="ion-calculator" ui-sref="app.tabs.simular">
+				<ion-nav-view name="tab-simular"></ion-nav-view>
+			</ion-tab>
+			<ion-tab title="Historial" icon-off="ion-ios-calendar-outline"
+                      icon-on="ion-ios-calendar" ui-sref="app.tabs.historial">
+				<ion-nav-view name="tab-historial"></ion-nav-view>
+			</ion-tab>
+			<!--ion-tab title="Perfil" icon-off="ion-ios-compose-outline" 
+                     icon-on="ion-ios-compose" ui-sref="app.tabs.perfil">
+				<ion-nav-view name="tab-perfil"></ion-nav-view>
+			</ion-tab-->
+			<ion-tab title="Aviso" icon-off="ion-ios-information-outline"
+                      icon-on="ion-ios-information" ui-sref="app.tabs.aviso">
+				<ion-nav-view name="tab-aviso"></ion-nav-view>
+			</ion-tab>
+		</ion-tabs>
+</ion-view>

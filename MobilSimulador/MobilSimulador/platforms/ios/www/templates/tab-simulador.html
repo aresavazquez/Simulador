@@ -1,39 +1,58 @@
-﻿<ion-view view-title="Simulador">
+﻿<ion-view view-title="Simulador" class="simular" cache-view="false">
     <ion-content class="padding">
-        <div class="list card">
-            <div class="list">
-                <div class="item item-input-inset">
-                    <label class="item-input-wrapper">
-                        <input type="number" placeholder="Valor del inmueble" ng-model="data.valor">
-                    </label>
+        <ion-list>
+            <ion-item class="valor">
+                <div class="group">
+                    <input type="number" ng-model="data.valor" required>
+                    <span class="highlight"></span>
+                    <label>Valor del inmueble</label>
                 </div>
-                <label class="item">
-                    <select class="ion-input-select--large" ng-model="data.selMens">
+            </ion-item>
+            <ion-item>
+                <div class="mdl-selectfield">
+                    <select class="browser-default" ng-model="data.selMens">
                         <option ng-repeat="mensualidad in mensualidades" value="{{mensualidad.id}}">
                             {{mensualidad.nombre}}
                         </option>
                     </select>
-                </label>
-                <label class="item">
-                    <select class="ion-input-select--large" ng-model="data.selPlazo">
+                </div>
+            </ion-item>
+            <ion-item>
+                <div class="mdl-selectfield">
+                    <select class="browser-default" ng-model="data.selPlazo">
                         <option ng-repeat="plazo in plazos" value="{{plazo.id}}">
                             {{plazo.nombrePlazo}}
                         </option>
                     </select>
-                </label>
-                <label class="item">
-                    <select class="ion-input-select--large" ng-model="data.selEstado">
+                </div>
+            </ion-item>
+            <ion-item>
+                <div class="mdl-selectfield">
+                    <select class="browser-default" ng-model="data.selEstado">
                         <option ng-repeat="estado in estados" value="{{estado.id}}">
                             {{estado.nombre}}
                         </option>
                     </select>
-                </label>
+                </div>
+            </ion-item>
+            <ion-item>
+                <md-button class="button button-block button-outline button-calm" ng-click="calcular()">
+                    Calcular
+                </md-button>
+            </ion-item>
+            <div class="card">
+                <ul class="list checkAviso">
+                    <li class="item item-checkbox">
+                        <label class="checkbox">
+                            <input type="checkbox" class="acepto" ng-model="data.acepto">
+                        </label>
+                        Acepto el Aviso de Privacidad.
+                    </li>
+                </ul>
+                <div class="item item-text-wrap aviso">
+                    Respecto al manejo de sus datos favor de revisar el Aviso de Privacidad.
+                </div>
             </div>
-        </div>
-        <div class="list">
-            <button ng-click="calcular()" class="button button-block button-outline button-calm">
-                Calcular
-            </button>
-        </div>
+        </ion-list>
     </ion-content>
 </ion-view>

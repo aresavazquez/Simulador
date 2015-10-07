@@ -1,57 +1,68 @@
-<ion-view view-title="Simulador">
+<ion-view view-title="Prospecto" cache-view="false">
     <ion-content class="padding">
-        <div class="list card">
-            <div class="item item-divider">
-                Prospecto
-            </div>
-            <div class="list">
-                <div class="item item-input-inset">
-                    <label class="item-input-wrapper">
-                        <input type="text" placeholder="Nombre">
-                    </label>
-                </div>
-                <div class="item item-input-inset">
-                    <label class="item-input-wrapper">
-                        <input type="email" placeholder="Correo prospecto">
-                    </label>
-                </div>
-                <div class="item item-input-inset">
-                    <label class="item-input-wrapper">
-                        <input type="text" placeholder="Tel&eacute;fono">
-                    </label>
-                </div>
-                <label class="item">
-                    <select class="ion-input-select--large">
-                        <option ng-repeat="estado in estados" value="{{estado.id}}">
-                            {{estado.nombre}}
-                        </option>
-                    </select>
-                </label>
-                <div class="item item-input-inset">
-                    <label class="item-input-wrapper">
-                        <input type="number" placeholder="Valor del inmueble">
-                    </label>
-                </div>
-                <label class="item">
-                    <select class="ion-input-select--large">
-                        <option ng-repeat="mensualidad in mensualidades" value="{{mensualidad.id}}">
-                            {{mensualidad.nombre}}
-                        </option>
-                    </select>
-                </label>
-                <label class="item">
-                    <select class="ion-input-select--large">
-                        <option ng-repeat="plazo in plazos" value="{{plazo.id}}">
-                            {{plazo.nombrePlazo}}
-                        </option>
-                    </select>
-                </label>
-            </div>
+        <div class="list card prospecto">
+            <ion-list>
+                <ion-item>
+                    <div class="group">
+                        <input type="text" ng-model="data.nombre" required>
+                        <span class="highlight"></span>
+                        <label>Nombre</label>
+                    </div>
+                </ion-item>
+                <ion-item>
+                    <div class="group">
+                        <input type="email" ng-model="data.correo" required>
+                        <span class="highlight"></span>
+                        <label>Correo prospecto</label>
+                    </div>
+                </ion-item>
+                <ion-item>
+                    <div class="group">
+                        <input type="number" ng-model="data.telefono" required>
+                        <span class="highlight"></span>
+                        <label>Telefono</label>
+                    </div>
+                </ion-item>
+                <ion-item>
+                    <div class="mdl-selectfield">
+                        <select class="browser-default" ng-model="data.selEstado">
+                            <option ng-repeat="estado in estados" value="{{estado.id}}">
+                                {{estado.nombre}}
+                            </option>
+                        </select>
+                    </div>
+                </ion-item>
+                <ion-item>
+                    <div class="group">
+                        <input type="number" ng-model="data.valorInmueble" required>
+                        <span class="highlight"></span>
+                        <label>Valor del inmueble</label>
+                    </div>
+                </ion-item>
+                <ion-item>
+                    <div class="mdl-selectfield">
+                        <select class="browser-default" ng-model="data.selMens">
+                            <option ng-repeat="mensualidad in mensualidades" value="{{mensualidad.id}}">
+                                {{mensualidad.nombre}}
+                            </option>
+                        </select>
+                    </div>
+                </ion-item>
+                <ion-item>
+                    <div class="mdl-selectfield">
+                        <select class="browser-default" ng-model="data.selPlazo">
+                            <option ng-repeat="plazo in plazos" value="{{plazo.id}}">
+                                {{plazo.nombrePlazo}}
+                            </option>
+                        </select>
+                    </div>
+                </ion-item>
+            </ion-list>
         </div>
         <div>
-            <button class="button button-block button-outline button-calm" ng-click="enviarMail()">
-                Enviar correo
-            </button>
+            <md-button class="button button-block button-outline button-calm add" ng-click="agregar()">
+                Agregar
+            </md-button>
         </div>
     </ion-content>
 </ion-view>

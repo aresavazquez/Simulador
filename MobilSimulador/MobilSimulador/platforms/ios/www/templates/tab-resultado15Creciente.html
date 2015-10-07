@@ -1,210 +1,109 @@
 ﻿<ion-view view-title="Resultado">
     <ion-header-bar align-title="center" class="bar-positive"></ion-header-bar>
-    <ion-content class="padding">
+    <ion-content class="padding resultado">
+        <div class="card resultado">
+            <div class="item item-text-wrap mensualidad">
+                <i class="ion-social-usd"></i>
+                15 Creciente
+            </div>
+        </div>
         <ion-list>
-            <ion-item class="item item-outline item-positive text-center">
-                {{banorte.nombreBanco}}
-            </ion-item>
-            <ion-item>
-                Pago mensual: $ {{pagoMensualBanorte}}
-            </ion-item>
-            <ion-item>
-                Monto del cr&eacute;dito: $ {{montoCreditoBanorte}}
-            </ion-item>
-            <ion-item>
-                Tasa de interes: $ {{tasaDeInteresBanorte}}
-            </ion-item>
-            <ion-item>
-                Ingreso requerido: $ {{ingresoRequeridoBanorte}}
-            </ion-item>
-            <ion-item>
-                Incremento anual de pago: $ {{incrementoAnualBanorte}}
-            </ion-item>
-            <ion-item>
-                CAT: $ {{catBanorte}}
-            </ion-item>
-            <ion-item class="item item-outline item-calm">
-                Gastos del cr&eacute;dito
-            </ion-item>
-            <ion-item>
-                Enganche: $ {{engancheBanorte}}
-            </ion-item>
-            <ion-item>
-                Avaluo: $ {{avaluoBanorte}}
-            </ion-item>
-            <ion-item>
-                Comisión por apertura: $ {{comisionAperturaBanorte}}
-            </ion-item>
-            <ion-item>
-                Gastos notariales: ${{gastosNotarialesBanorte}}
-            </ion-item>
-            <ion-item>
-                Desembolso Total: ${{desembolsoTotalBanorte}}
-            </ion-item>
+            <div ng-repeat="group in grupoBanorte">
+                <ion-item class="item item-outline item-positive text-center" ng-click="toggleGroup(group)"
+                          ng-class="{active: isGroupShown(group)}">
+                    <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+                    {{group.name}}
+                    <br><br>
+                    <!--marquee width="100%" scrolldelay="100" scrollamount="5" direction="left" loop="infinite"><span>Pago Mensual 
+                    {{group.pagoMensual}}</span></marquee-->
+                    <span class="mensual">Pago Mensual 
+                    {{group.pagoMensual}}</span>
+                </ion-item>
+                <ion-item ng-repeat="item in group.members" 
+                          class="item-accordion"
+                          ng-show="isGroupShown(group)">
+                    <div class="row">
+                        <div class="col col-75">{{item.name}}:</div>
+                        <div class="col">{{item.quantity}}</div>
+                    </div>                    
+                </ion-item>
+            </div>
         </ion-list>
         <ion-list>
-            <ion-item class="item item-outline item-positive text-center">
-                {{santander.nombreBanco}}
-            </ion-item>
-            <ion-item>
-                Pago mensual: $ {{pagoMensualSantander}}
-            </ion-item>
-            <ion-item>
-                Monto del cr&eacute;dito: $ {{montoCreditoSantander}}
-            </ion-item>
-            <ion-item>
-                Tasa de interes: $ {{tasaDeInteresSantander}}
-            </ion-item>
-            <ion-item>
-                Ingreso requerido: $ {{ingresoRequeridoSantander}}
-            </ion-item>
-            <ion-item>
-                Incremento anual de pago: $ {{incrementoAnualSantander}}
-            </ion-item>
-            <ion-item>
-                CAT: $ {{catSantander}}
-            </ion-item>
-            <ion-item class="item item-outline item-calm">
-                Gastos del cr&eacute;dito
-            </ion-item>
-            <ion-item>
-                Enganche: $ {{engancheSantander}}
-            </ion-item>
-            <ion-item>
-                Avaluo: $ {{avaluoSantander}}
-            </ion-item>
-            <ion-item>
-                Comisión por apertura: $ {{comisionAperturaSantander}}
-            </ion-item>
-            <ion-item>
-                Gastos notariales: ${{gastosNotarialesSantander}}
-            </ion-item>
-            <ion-item>
-                Desembolso Total: ${{desembolsoTotalSantander}}
-            </ion-item>
+            <div ng-repeat="group in grupoSantander">
+                <ion-item class="item item-outline item-positive text-center" ng-click="toggleGroup(group)"
+                          ng-class="{active: isGroupShown(group)}">
+                    <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+                    {{group.name}}
+                    <br><br>
+                    <span class="mensual">Pago Mensual 
+                    {{group.pagoMensual}}</span>
+                </ion-item>
+                <ion-item ng-repeat="item in group.members" class="item-accordion" ng-show="isGroupShown(group)">
+                    <div class="row">
+                        <div class="col col-75">{{item.name}}:</div>
+                        <div class="col">{{item.quantity}}</div>
+                    </div>
+                </ion-item>
+            </div>
         </ion-list>
         <ion-list>
-            <ion-item class="item item-outline item-positive text-center">
-                {{scotiabank.nombreBanco}}
-            </ion-item>
-            <ion-item>
-                Pago mensual: $ {{pagoMensualScotiabank}}
-            </ion-item>
-            <ion-item>
-                Monto del cr&eacute;dito: $ {{montoCreditoScotiabank}}
-            </ion-item>
-            <ion-item>
-                Tasa de interes: $ {{tasaDeInteresScotiabank}}
-            </ion-item>
-            <ion-item>
-                Ingreso requerido: $ {{ingresoRequeridoScotiabank}}
-            </ion-item>
-            <ion-item>
-                Incremento anual de pago: $ {{incrementoAnualScotiabank}}
-            </ion-item>
-            <ion-item>
-                CAT: $ {{catScotiabank}}
-            </ion-item>
-            <ion-item class="item item-outline item-calm">
-                Gastos del cr&eacute;dito
-            </ion-item>
-            <ion-item>
-                Enganche: $ {{engancheScotiabank}}
-            </ion-item>
-            <ion-item>
-                Avaluo: $ {{avaluoScotiabank}}
-            </ion-item>
-            <ion-item>
-                Comisión por apertura: $ {{comisionAperturaScotiabank}}
-            </ion-item>
-            <ion-item>
-                Gastos notariales: ${{gastosNotarialesScotiabank}}
-            </ion-item>
-            <ion-item>
-                Desembolso Total: ${{desembolsoTotalScotiabank}}
-            </ion-item>
+            <div ng-repeat="group in grupoScotiabank">
+                <ion-item class="item item-outline item-positive text-center" ng-click="toggleGroup(group)"
+                          ng-class="{active: isGroupShown(group)}">
+                    <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+                    {{group.name}}
+                    <br><br>
+                    <span class="mensual">Pago Mensual 
+                    {{group.pagoMensual}}</span>
+                </ion-item>
+                <ion-item ng-repeat="item in group.members" class="item-accordion" ng-show="isGroupShown(group)">
+                    <div class="row">
+                        <div class="col col-75">{{item.name}}:</div>
+                        <div class="col">{{item.quantity}}</div>
+                    </div>
+                </ion-item>
+            </div>
         </ion-list>
         <ion-list>
-            <ion-item class="item item-outline item-positive text-center">
-                {{afirme.nombreBanco}}
-            </ion-item>
-            <ion-item>
-                Pago mensual: $ {{pagoMensualAfirme}}
-            </ion-item>
-            <ion-item>
-                Monto del cr&eacute;dito: $ {{montoCreditoAfirme}}
-            </ion-item>
-            <ion-item>
-                Tasa de interes: $ {{tasaDeInteresAfirme}}
-            </ion-item>
-            <ion-item>
-                Ingreso requerido: $ {{ingresoRequeridoAfirme}}
-            </ion-item>
-            <ion-item>
-                Incremento anual de pago: $ {{incrementoAnualAfirme}}
-            </ion-item>
-            <ion-item>
-                CAT: $ {{catAfirme}}
-            </ion-item>
-            <ion-item class="item item-outline item-calm">
-                Gastos del cr&eacute;dito
-            </ion-item>
-            <ion-item>
-                Enganche: $ {{engancheAfirme}}
-            </ion-item>
-            <ion-item>
-                Avaluo: $ {{avaluoAfirme}}
-            </ion-item>
-            <ion-item>
-                Comisión por apertura: $ {{comisionAperturaAfirme}}
-            </ion-item>
-            <ion-item>
-                Gastos notariales: ${{gastosNotarialesAfirme}}
-            </ion-item>
-            <ion-item>
-                Desembolso Total: ${{desembolsoTotalAfirme}}
-            </ion-item>
+            <div ng-repeat="group in grupoAfirme">
+                <ion-item class="item item-outline item-positive text-center" ng-click="toggleGroup(group)"
+                          ng-class="{active: isGroupShown(group)}">
+                    <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+                    {{group.name}}
+                    <br><br>
+                    <span class="mensual">Pago Mensual 
+                    {{group.pagoMensual}}</span>
+                </ion-item>
+                <ion-item ng-repeat="item in group.members" class="item-accordion" ng-show="isGroupShown(group)">
+                    <div class="row">
+                        <div class="col col-75">{{item.name}}:</div>
+                        <div class="col">{{item.quantity}}</div>
+                    </div>
+                </ion-item>
+            </div>
         </ion-list>
         <ion-list>
-            <ion-item class="item item-outline item-positive text-center">
-                {{hsbc.nombreBanco}}
-            </ion-item>
-            <ion-item>
-                Pago mensual: $ {{pagoMensualHSBC}}
-            </ion-item>
-            <ion-item>
-                Monto del cr&eacute;dito: $ {{montoCreditoHSBC}}
-            </ion-item>
-            <ion-item>
-                Tasa de interes: $ {{tasaDeInteresHSBC}}
-            </ion-item>
-            <ion-item>
-                Ingreso requerido: $ {{ingresoRequeridoHSBC}}
-            </ion-item>
-            <ion-item>
-                Incremento anual de pago: $ {{incrementoAnualHSBC}}
-            </ion-item>
-            <ion-item>
-                CAT: $ {{catHSBC}}
-            </ion-item>
-            <ion-item class="item item-outline item-calm">
-                Gastos del cr&eacute;dito
-            </ion-item>
-            <ion-item>
-                Enganche: $ {{engancheHSBC}}
-            </ion-item>
-            <ion-item>
-                Avaluo: $ {{avaluoHSBC}}
-            </ion-item>
-            <ion-item>
-                Comisión por apertura: $ {{comisionAperturaHSBC}}
-            </ion-item>
-            <ion-item>
-                Gastos notariales: ${{gastosNotarialesHSBC}}
-            </ion-item>
-            <ion-item>
-                Desembolso Total: ${{desembolsoTotalHSBC}}
-            </ion-item>
+            <div ng-repeat="group in grupoHSBC">
+                <ion-item class="item item-outline item-positive text-center" ng-click="toggleGroup(group)"
+                          ng-class="{active: isGroupShown(group)}">
+                    <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+                    {{group.name}}
+                    <br><br>
+                    <span class="mensual">Pago Mensual 
+                    {{group.pagoMensual}}</span>
+                </ion-item>
+                <ion-item ng-repeat="item in group.members" class="item-accordion" ng-show="isGroupShown(group)">
+                    <div class="row">
+                        <div class="col col-75">{{item.name}}:</div>
+                        <div class="col">{{item.quantity}}</div>
+                    </div>
+                </ion-item>
+            </div>
         </ion-list>
+        
+        <md-button class="button button-positive mail" ng-click="mandarCorreo()" >
+            Mandar mail
+        </md-button>
     </ion-content>
 </ion-view>

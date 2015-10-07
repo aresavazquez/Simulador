@@ -44,6 +44,8 @@
 		89858EAC3DDE4231B8E46F95 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B4A4228265443D8040ABC2 /* MessageUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F2DADC8429DD42E389DC51F3 /* APPPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = 651E59009CE04BD2B5C70BB3 /* APPPrinter.m */; };
 		39C10EEC4A7B4821869A973E /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B0DE635014FB9809BDBD7 /* CDVInAppBrowser.m */; };
+		4D39C49650764B728409BD75 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3622D82E470403BA1B8225F /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		7EC87C0306774BA699076CEB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59BE68E8BE54CCD8BF5C588 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +120,8 @@
 		577A07EE190B448D859598FC /* APPPrinter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "APPPrinter.h"; path = "de.appplant.cordova.plugin.printer/APPPrinter.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		CD2B0DE635014FB9809BDBD7 /* CDVInAppBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVInAppBrowser.m"; path = "org.apache.cordova.inappbrowser/CDVInAppBrowser.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		87B13332D5CB46499A813826 /* CDVInAppBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVInAppBrowser.h"; path = "org.apache.cordova.inappbrowser/CDVInAppBrowser.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		B3622D82E470403BA1B8225F /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "ImageIO.framework"; path = "System/Library/Frameworks/ImageIO.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		C59BE68E8BE54CCD8BF5C588 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "CoreLocation.framework"; path = "System/Library/Frameworks/CoreLocation.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +134,8 @@
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
 				89858EAC3DDE4231B8E46F95 /* MessageUI.framework in Frameworks */,
+				4D39C49650764B728409BD75 /* ImageIO.framework in Frameworks */,
+				7EC87C0306774BA699076CEB /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +209,8 @@
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */,
 				E1B4A4228265443D8040ABC2 /* MessageUI.framework */,
+				B3622D82E470403BA1B8225F /* ImageIO.framework */,
+				C59BE68E8BE54CCD8BF5C588 /* CoreLocation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
