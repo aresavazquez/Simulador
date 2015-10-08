@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget defaultlocale="en-US" id="io.cordova.myappe2785d518e9f4f6ea03055878dd7a400" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps">
+<widget defaultlocale="en-US" id="com.socasesores.simulador" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps">
     <preference name="loglevel" value="DEBUG" />
     <feature name="EmailComposer">
         <param name="android-package" value="de.appplant.cordova.emailcomposer.EmailComposer" />
@@ -46,12 +46,10 @@
     <access origin="*" />
     <vs:features />
     <preference name="SplashScreen" value="screen" />
-    <preference name="windows-target-version" value="8.1" />
-    <preference name="windows-phone-target-version" value="8.1" />
     <preference name="SplashScreenDelay" value="3000" />
-    <preference name="android-minSdkVersion" value="18" />
-    <preference name="android-maxSdkVersion" value="21" />
-    <preference name="android-targetSdkVersion" value="18" />
+    <preference name="android-minSdkVersion" value="19" />
+    <preference name="android-maxSdkVersion" value="23" />
+    <preference name="android-targetSdkVersion" value="19" />
     <preference name="KeepRunning" value="True" />
     <preference name="ShowTitle" value="False" />
     <preference name="InAppBrowserStorageEnabled" value="True" />
