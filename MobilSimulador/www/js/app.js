@@ -1,11 +1,13 @@
 (
 	function () {
-	    var app = angular.module('app', ['ionic', 'ngCordova', 'angularMoment', 'ngOpenFB', 'ngMaterial', 'app.controllers', 'app.services']);
+	    var app = angular.module('app', ['ionic', 'ngCordova', 
+            'angularMoment', 'ngOpenFB', 'ngMaterial', 
+            'app.controllers', 'app.services']);
 
-	    app.run(function ($ionicPlatform, ngFB) {
+	    app.run(function ($ionicPlatform, $rootScope, $state, ngFB) {
 	        ngFB.init({
-	            //appId: '1639952819598830'
-	            appId: '1511059905871041'
+	            appId: '1639952819598830'
+	            //appId: '1511059905871041'
 	        });
 
 	        $ionicPlatform.ready(function () {
@@ -15,6 +17,12 @@
 	            if (window.StatusBar) {
 	                StatusBar.styleLightContent();
 	            }
+                /*$rootScope.$on('$stateChangeStart', function(event, toState) {
+                    if (toState.name !== "login" && (!localStorage.getItem('accessToken') || !localStorage.getItem('usuario'))) {
+                        $state.go('login');
+                        event.preventDefault();
+                    }
+                });*/
 	        });
 	    })
 
@@ -38,6 +46,14 @@
                 views: {
                     'principal': {
                         templateUrl: 'templates/tabs.html'
+                    }
+                }
+            }).state('app.tabs.home', {
+                url: '/home',
+                views: {
+                    'tab-home': {
+                        templateUrl: 'templates/tab-home.html',
+                        controller: 'HomeCtrl'
                     }
                 }
             }).state('app.tabs.dash', {

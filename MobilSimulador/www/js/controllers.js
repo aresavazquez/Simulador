@@ -18,34 +18,52 @@
             foto: ''
         };
 
+        console.log(localStorage.getItem('accessToken'), localStorage.getItem('usuario'));
+        if(localStorage.getItem('accessToken') || localStorage.getItem('usuario')){
+            $state.go("app.tabs.home");
+        };
+
         $scope.entrar = function () {
             if($scope.data.nombre === '' ||
                 $scope.data.apellido === '' ||
                 $scope.data.correo === '') {
                 muestraMensaje("Error", "Debe rellenar los campos de registro para continuar", $ionicPopup);
             } else {
-                window.localStorage['usuario'] = JSON.stringify($scope.data);
-                $state.go("app.tabs.dash");
+                window.localStorage.setItem('usuario', JSON.stringify($scope.data));
+                //$state.go("app.tabs.dash");
+                $state.go("app.tabs.home");
             }
             
         };
-
-        $scope.fbLogin = function () {
-            ngFB.login({
-                scope: 'email,user_likes'
-            }).then(function (response) {
-                if (response.status === 'connected') {
-                    localStorage.status = "conectado";
-                    localStorage.accessToken = response.access_token;
-                    console.log('Facebook login succeeded');
-                    // $scope.closeLogin();
-                    $state.go("app.tabs.dash");
-                } else {
-                    localStorage.status = "deconectado"
-                    alert('Facebook login failed');
+        $scope.FBlogin = function() {
+            ngFB.login({scope: 'email'}).then(
+                function(response){
+                    if(response.status == 'connected'){
+                        console.log('Facebook login');
+                        //$state.go("app.tabs.dash");
+                        localStorage.setItem('accessToken', response.authResponse.accessToken);
+                        $state.go("app.tabs.home");
+                    }else{
+                        alert('Facebook login failed');
+                    }
                 }
-            });
-        };
+            )
+        }
+        $scope.fbLoginSuccess = function( userData ){
+            alert("UserInfo: " + JSON.stringify(userData));
+        }
+    });
+
+    control.controller('HomeCtrl', function($scope, ngFB){
+        ngFB.api({
+            path: '/me',
+            params: {fields: 'id,first_name,last_name,email'}
+        }).then(function (user) {
+            console.log(user);
+            $scope.user = user;
+        }, function (error) {
+            alert('Facebook error: ' + error.error_description);
+        });
     });
 
     control.controller('DashCtrl', function ($scope, $state, Estados, Plazos, Mensualidades,

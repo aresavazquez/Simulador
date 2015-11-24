@@ -1,9 +1,13 @@
 <ion-view>
 		<ion-tabs class="tabs-icon-top tabs-stable">
-			<ion-tab title="Prospecto" icon-off="ion-ios-person-outline" 
+			<ion-tab title="Home" icon-off="ion-ios-person-outline" 
+                     icon-on="ion-person-add" ui-sref="app.tabs.home">
+				<ion-nav-view name="tab-home"></ion-nav-view>
+			</ion-tab>
+			<!--ion-tab title="Prospecto" icon-off="ion-ios-person-outline" 
                      icon-on="ion-person-add" ui-sref="app.tabs.dash">
 				<ion-nav-view name="tab-dash"></ion-nav-view>
-			</ion-tab>
+			</ion-tab-->
 			<ion-tab title="Simulador" icon-off="ion-ios-calculator-outline"
                       icon-on="ion-calculator" ui-sref="app.tabs.simular">
 				<ion-nav-view name="tab-simular"></ion-nav-view>
