@@ -232,7 +232,21 @@ label.search{
     border-bottom: 1px solid #1dafec;
 }
 .item-stacked-label .input-label, .item-stacked-label .icon{
-    color: #1dafec;
+    color: #41546e
+}
+.card .item:first-child, .list-inset .item:first-child, .padding > .list .item:first-child{
+    background-color: rgba(29, 175, 236, .4);
+}
+.card .item, .list-inset .item, .padding > .list .item, .padding-horizontal > .list .item{
+    background: none;
+}
+.list:last-child.card{
+    background: url(../img/back.jpg)no-repeat;
+    background-size: cover;
+}
+.group{
+    background-color: rgba(255, 255, 255, 0.6);
+    padding-left: 10px;
 }
 .list.login{
     margin: 80px 0 50px;
@@ -247,7 +261,7 @@ label.search{
 }
 .profile{
     border-radius: 100%;
-    margin: auto;
+    margin: 10px auto;
     display: block;
 }
 .pane, .view{
