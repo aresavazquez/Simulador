@@ -7,7 +7,7 @@
                 
             }
         };
-    }])
+    });
 
     serv.factory('Mensualidades', function () {
         var mensaualidades = [
