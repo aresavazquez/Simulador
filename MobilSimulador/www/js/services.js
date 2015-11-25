@@ -1,6 +1,14 @@
 (function () {
     var serv = angular.module('app.services', []);
 
+    serv.factory('DBService', function(){
+        return {
+            save: function(){
+                
+            }
+        };
+    }])
+
     serv.factory('Mensualidades', function () {
         var mensaualidades = [
             { id: 0, nombre: 'Mensualidad' },
