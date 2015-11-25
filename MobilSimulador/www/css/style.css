@@ -238,15 +238,40 @@ label.search{
     margin: 80px 0 50px;
 }
 .logoImg {
-    width: 100px;
+    width: 140px;
     position: absolute;
     top: 10px;
-    right: 20px;
-    margin-top: 0;
+    right: 0;
+    left: 0;
+    margin: 20px auto;
+}
+.profile{
+    border-radius: 100%;
+    margin: auto;
+    display: block;
+}
+.pane, .view{
+    background: url(../img/back.jpg)no-repeat;
+    background-size: cover;
+}
+.item-stacked-label input, .item-stacked-label textarea{
+    background-color: rgba(255, 255, 255, .6);
+    padding-left: 10px;
+}
+.registro{
+    text-align: center;
+    font-size: 22px;
 }
 .button.button-positive.save{
     background: #1dafec;
     margin-bottom: 25px;
+}
+.button.button-positive.save.facebook{
+    width: 300px;
+    background: #4867aa;
+    margin: 40px auto;
+    display: block;
+    font-size: 18px;
 }
 button.face{
     background: #4867aa !important;
@@ -258,7 +283,7 @@ button{
     font-size: 30px;
     position: absolute;
     top: 5px;
-    left: 40px;
+    left: 20px;
     border-radius: 10px;
 } 
 span.mensual{
