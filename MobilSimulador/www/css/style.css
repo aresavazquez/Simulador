@@ -233,7 +233,7 @@ label.search{
     pointer-events: visible;
     padding-left: 0px;
     width: 90%;
-    margin: 0 auto 20px;
+    margin: 0 auto;
     border: none;
 }
 .top{
@@ -300,6 +300,9 @@ label.search{
 .button.button-positive.save{
     background: #1dafec;
     margin-bottom: 25px;
+    width: 300px;
+    margin: auto;
+    display: block;
 }
 .button.button-positive.save.facebook{
     width: 300px;
