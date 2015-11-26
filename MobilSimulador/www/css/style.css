@@ -290,8 +290,8 @@ label.search{
     padding-left: 10px;
 }
 .button.button-positive.closeSession{
-    position: absolute;
-    top: 380px;
+    background-color: rgba(29, 175, 236, .4);
+    text-transform: uppercase;
 }
 .registro{
     text-align: center;
