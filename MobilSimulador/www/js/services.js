@@ -9,6 +9,15 @@
         };
     });
 
+    serv.factory('User', function() {
+        return {
+            getLocal: function(){
+                var rawUser = JSON.parse(localStorage.getItem('usuario'));
+                return {first_name: rawUser.nombre, last_name: rawUser.apellido, email: rawUser.correo};
+            }
+        }
+    });
+
     serv.factory('Mensualidades', function () {
         var mensaualidades = [
             { id: 0, nombre: 'Mensualidad' },

@@ -54,16 +54,21 @@
         }
     });
 
-    control.controller('HomeCtrl', function($scope, ngFB){
-        ngFB.api({
-            path: '/me',
-            params: {fields: 'id,first_name,last_name,email'}
-        }).then(function (user) {
-            console.log(user);
-            $scope.user = user;
-        }, function (error) {
-            alert('Facebook error: ' + error.error_description);
-        });
+    control.controller('HomeCtrl', function($scope, ngFB, User){
+        if(localStorage.getItem("accessToken")){
+            ngFB.api({
+                path: '/me',
+                params: {fields: 'id,first_name,last_name,email'}
+            }).then(function (user) {
+                console.log(user);
+                $scope.user = user;
+            }, function (error) {
+                alert('Facebook error: ' + error.error_description);
+            });
+        }else{
+            $scope.user = User.getLocal();
+        }
+        
     });
 
     control.controller('DashCtrl', function ($scope, $state, Estados, Plazos, Mensualidades,
