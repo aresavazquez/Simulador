@@ -58,11 +58,15 @@ select{
     margin: 10px 10px;
 }
 .scroll{
-    padding: 10px;
+    padding: 0px;
     color: #41546e;
 }
 .padding {
-    background-color: #D4D4D4;
+    background: #fff;
+    padding: 0;
+}
+.card.prospecto {
+    padding-top: 0 !important;
 }
 .ion-ios-arrow-right:before {
     content: "\f3d3";
@@ -171,8 +175,9 @@ li{
 .padding.resultado .scroll{
     padding: 10px 0;
 }
-.item{
+.opMenu{
     border-width: 0px;
+    opacity: .7;
 }
 .valor{
     padding-top: 50px;
@@ -229,7 +234,10 @@ label.search{
     padding-left: 0px;
     width: 90%;
     margin: 0 auto 20px;
-    border-bottom: 1px solid #1dafec;
+    border: none;
+}
+.top{
+    margin-top: 40px;
 }
 .item-stacked-label .input-label, .item-stacked-label .icon{
     color: #41546e
@@ -239,9 +247,15 @@ label.search{
 }
 .card .item, .list-inset .item, .padding > .list .item, .padding-horizontal > .list .item{
     background: none;
+    border: none;
 }
 .list:last-child.card{
-    background: url(../img/back.jpg)no-repeat;
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+.menu .scroll-content {
+    background: url(../img/back2.jpg)no-repeat center;
     background-size: cover;
 }
 .group{
@@ -254,7 +268,7 @@ label.search{
 .logoImg {
     width: 140px;
     position: absolute;
-    top: 10px;
+    top: -75px;
     right: 0;
     left: 0;
     margin: 20px auto;
