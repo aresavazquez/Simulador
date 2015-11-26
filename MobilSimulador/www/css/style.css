@@ -239,6 +239,9 @@ label.search{
 .top{
     margin-top: 40px;
 }
+.item{
+    border: none;
+}
 .item-stacked-label .input-label, .item-stacked-label .icon{
     color: #41546e
 }
@@ -278,7 +281,7 @@ label.search{
     margin: 10px auto;
     display: block;
 }
-.pane, .view{
+.loginTab{
     background: url(../img/back.jpg)no-repeat;
     background-size: cover;
 }
