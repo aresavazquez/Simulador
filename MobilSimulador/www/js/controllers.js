@@ -10,6 +10,13 @@
 
         });
     }
+    control.controller('AppCtrl', function($scope, $state){
+        $scope.closeSession = function() {
+            localStorage.clear();
+            $state.go('login');
+        }
+    });
+
     control.controller('LoginCtrl', function ($scope, $state, $ionicModal, $ionicPopup, $timeout, ngFB) {
         $scope.data = {
             nombre: '',
@@ -18,7 +25,6 @@
             foto: ''
         };
 
-        console.log(localStorage.getItem('accessToken'), localStorage.getItem('usuario'));
         if(localStorage.getItem('accessToken') || localStorage.getItem('usuario')){
             $state.go("app.tabs.home");
         };

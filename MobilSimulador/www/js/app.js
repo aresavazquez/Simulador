@@ -17,12 +17,13 @@
 	            if (window.StatusBar) {
 	                StatusBar.styleLightContent();
 	            }
-                /*$rootScope.$on('$stateChangeStart', function(event, toState) {
-                    if (toState.name !== "login" && (!localStorage.getItem('accessToken') || !localStorage.getItem('usuario'))) {
-                        $state.go('login');
+                $rootScope.$on('$stateChangeStart', function(event, toState) {
+                    console.log()
+                    if (toState.name !== "login" && !(localStorage.getItem('accessToken') || localStorage.getItem('usuario'))) {
+                        $state.go("login");
                         event.preventDefault();
                     }
-                });*/
+                });
 	        });
 	    })
 
@@ -38,7 +39,8 @@
             .state('app', {
                 url: '/app',
                 abstract: true,
-                templateUrl: 'principal.html'
+                templateUrl: 'principal.html',
+                controller: 'AppCtrl'
             })
             // Pestañas
             .state('app.tabs', {
