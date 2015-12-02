@@ -171,6 +171,13 @@
                         templateUrl: 'templates/aviso.html'
                     }
                 }
+            }).state('app.tabs.datos', {
+                url: '/datos',
+                views: {
+                    'tab-datos': {
+                        templateUrl: 'templates/tab-datos.html',
+                    }
+                }
             });
 
 	        $urlRouterProvider.otherwise('/login');
