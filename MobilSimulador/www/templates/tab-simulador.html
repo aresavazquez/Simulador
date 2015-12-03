@@ -15,6 +15,7 @@
             </ion-item>
             <ion-item>
                 <div class="mdl-selectfield">
+                    <p class="plazo">Mensualidad</p>
                     <select class="browser-default" ng-model="data.selMens">
                         <option ng-repeat="mensualidad in mensualidades" value="{{mensualidad.id}}">
                             {{mensualidad.nombre}}
@@ -24,6 +25,7 @@
             </ion-item>
             <ion-item>
                 <div class="mdl-selectfield">
+                    <p class="plazo">Plazo anual</p>
                     <select class="browser-default" ng-model="data.selPlazo">
                         <option ng-repeat="plazo in plazos" value="{{plazo.id}}">
                             {{plazo.nombrePlazo}}

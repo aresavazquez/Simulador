@@ -20,9 +20,9 @@
 
     serv.factory('Mensualidades', function () {
         var mensaualidades = [
-            { id: 0, nombre: 'Mensualidad' },
-            { id: 1, nombre: 'Fija' },
-            { id: 2, nombre: 'Creciente' }
+            { id: 0, nombre: '-' },
+            { id: 1, nombre: 'Pagos Fijos' },
+            { id: 2, nombre: 'Pagos Crecientes' }
         ];
         return {
             all: function () {
@@ -44,7 +44,7 @@
 
     serv.factory('Plazos', function () {
         var plazos = [
-        { id: 0, nombrePlazo: 'Plazo anual', idTipoMensualidad: 0 },
+        { id: 0, nombrePlazo: '-', idTipoMensualidad: 0 },
         { id: 2, nombrePlazo: '15' },
         { id: 1, nombrePlazo: '20' },
         //{ id: 3, nombrePlazo: '20', idTipoMensualidad: 2 },
