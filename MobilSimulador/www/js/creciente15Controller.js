@@ -41,7 +41,7 @@
                 var myPopup = $ionicPopup.show({
                     template: '<input type="text" placeholder="Nombre" ng-model="data.nombre" />'
                     +'<input type="email" placeholder="Correo" ng-model="data.correo" />'
-                    +'<input type="text" placeholder="Teléfono" ng-model="data.telefono" />'
+                    +'<input type="number" placeholder="Teléfono" ng-model="data.telefono" />'
                     +'<div class="card">'
                     +'    <ul class="list checkAviso">'
                     +'        <li class="item item-checkbox">'
