@@ -26,7 +26,7 @@
         };
 
         if(localStorage.getItem('accessToken') || localStorage.getItem('usuario')){
-            $state.go("app.tabs.home");
+            $state.go("app.tabs.simular");
         };
 
         $scope.entrar = function () {
@@ -37,7 +37,7 @@
             } else {
                 window.localStorage.setItem('usuario', JSON.stringify($scope.data));
                 //$state.go("app.tabs.dash");
-                $state.go("app.tabs.home");
+                $state.go("app.tabs.simular");
             }
             
         };
@@ -48,7 +48,7 @@
                         console.log('Facebook login');
                         //$state.go("app.tabs.dash");
                         localStorage.setItem('accessToken', response.authResponse.accessToken);
-                        $state.go("app.tabs.home");
+                        $state.go("app.tabs.simular");
                     }else{
                         alert('Facebook login failed');
                     }

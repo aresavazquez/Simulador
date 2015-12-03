@@ -50,10 +50,10 @@
                         templateUrl: 'templates/tabs.html'
                     }
                 }
-            }).state('app.tabs.home', {
+            }).state('app.home', {
                 url: '/home',
                 views: {
-                    'tab-home': {
+                    'principal': {
                         templateUrl: 'templates/tab-home.html',
                         controller: 'HomeCtrl'
                     }
