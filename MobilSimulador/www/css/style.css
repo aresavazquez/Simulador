@@ -351,6 +351,25 @@ span.mensual{
 .list:last-child{
     margin-bottom: 10px;
 }
+/*HOME ESTILOS*/
+.SOC{
+    padding: 50px 0 20px;
+    text-align: center;
+    color: #41546e;
+}
+.vegas{
+    margin: auto;
+    display: block;
+}
+.direccion{
+    text-align: center;
+    font-size: 16px;
+    padding: 35px 0;
+}
+.page{
+    color: #41546e;
+    text-decoration: none;
+}
 
 
 
