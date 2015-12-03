@@ -163,6 +163,7 @@ li{
 }
 .popup-container.active .popup{
     background: #41546e;
+    width: 350px;
 }
 .item.active.item-positive{
     border: none;
