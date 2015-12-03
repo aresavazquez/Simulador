@@ -17,7 +17,7 @@
             if ($scope.data.valor === null) {
                 muestraMensaje("Error", "No es posible realizar el c&aacute;lculo debido a que no ha ingresado un valor del inmueble");
             } else {
-                if($scope.data.acepto === true){
+                //if($scope.data.acepto === true){
                     if ($scope.data.selMens === "2") {
                         if ($scope.data.selPlazo === "1") {
                             if ($scope.data.selEstado === 0) {
@@ -87,18 +87,18 @@
                     else {
                         muestraMensaje("Error", "No es posible realizar el c&aacute;lculo debido a que no seleccion&oacute; una mensualidad");
                     }
-                }
-                else {
-                    
-                        var alertPopup = $ionicPopup.alert({
-                            title: 'Atencion',
-                            template: 'Debe Aceptar el Aviso de Privacidad'
-                        });
-                        alertPopup.then(function (res) {
-                            console.log('Se ha informado al usuario');
-                        });
-                    
-                }
+                //}
+                //else {
+                //    
+                //        var alertPopup = $ionicPopup.alert({
+                //            title: 'Atencion',
+                //            template: 'Debe Aceptar el Aviso de Privacidad'
+                //        });
+                //        alertPopup.then(function (res) {
+                //            console.log('Se ha informado al usuario');
+                //        });
+                //    
+                //}
             }
         };
 

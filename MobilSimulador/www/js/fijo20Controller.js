@@ -36,7 +36,22 @@
             if ($state.params.idHistorial == "") {
                 data = $scope.data;
                 var myPopup = $ionicPopup.show({
-                    template: '<input type="text" placeholder="Nombre" ng-model="data.nombre" /><input type="email" placeholder="Correo" ng-model="data.correo" />',
+                    template: '<input type="text" placeholder="Nombre" ng-model="data.nombre" />'
+                    +'<input type="email" placeholder="Correo" ng-model="data.correo" />'
+                    +'<input type="text" placeholder="Teléfono" ng-model="data.telefono" />'
+                    +'<div class="card">'
+                    +'    <ul class="list checkAviso">'
+                    +'        <li class="item item-checkbox">'
+                    +'            <label class="checkbox">'
+                    +'                <input type="checkbox" class="acepto" ng-model="data.acepto">'
+                    +'            </label>'
+                    +'            Acepto el Aviso de Privacidad.'
+                    +'        </li>'
+                    +'    </ul>'
+                    +'    <div class="item item-text-wrap aviso">'
+                    +'        Respecto al manejo de sus datos favor de revisar el Aviso de Privacidad.'
+                    +'    </div>'
+                    +'</div>',
                     title: 'Destinatario',
                     subTitle: '',
                     scope: $scope,
