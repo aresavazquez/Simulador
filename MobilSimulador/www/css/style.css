@@ -352,22 +352,11 @@ span.mensual{
     margin-bottom: 10px;
 }
 /*HOME ESTILOS*/
-.logo{
-    margin: 35px auto 5px;
-}
 .vegas{
-    margin: auto;
-    display: block;
+    width: 100%;
+    margin-top: 11px;
 }
-.direccion{
-    text-align: center;
-    font-size: 16px;
-    padding: 35px 0;
-}
-.page{
-    color: #41546e;
-    text-decoration: none;
-}
+
 
 
 
