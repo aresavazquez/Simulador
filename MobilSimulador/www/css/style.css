@@ -356,6 +356,21 @@ span.mensual{
     width: 100%;
     margin-top: 11px;
 }
+/*login*/
+.o{
+    margin: 0 auto 20px;
+    display: block;
+}
+.o2{
+    margin: 20px auto 20px;
+    display: block;
+}
+.button.button-positive.save.sisec{
+    margin-top: 15px;   
+}
+.registro.sisec{
+    color: #fff !important;
+}
 
 
 
