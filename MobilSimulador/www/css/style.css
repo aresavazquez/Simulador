@@ -366,11 +366,17 @@ span.mensual{
     margin: 20px auto 20px;
     display: block;
 }
-.button.button-positive.save.sisec{
-    margin-top: 15px;   
-}
 .registro.sisec{
     color: #fff !important;
+}
+.sisec.button{
+    background: #1dafec;
+    margin-bottom: 25px;
+    width: 300px;
+    margin: auto;
+    color: #fff;
+    border: none;
+    display: block;
 }
 .span{
     color: #41546e;
@@ -379,6 +385,14 @@ span.mensual{
 }
 .plazo{
     font-size: 18px !important;
+}
+.datosSISEC{
+    display: none;
+}
+.campana {
+    margin: 30px 0 10px;
+    text-align: center;
+    font-size: 20px;
 }
 
 
