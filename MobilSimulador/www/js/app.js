@@ -74,6 +74,13 @@
                         controller: 'SimulaCtrl'
                     }
                 }
+            }).state('app.sisecPerfil', {
+                url: '/sisecPerfil',
+                views: {
+                    'tab-sisecPerfil': {
+                        templateUrl: 'templates/sisecPerfil.html',
+                    }
+                }
             }).state('app.tabs.resultado15Fijo', {
                 url: '/resultado/:valor/:selMens/:selPlazo/:selEstado/:idHistorial',
                 views: {
