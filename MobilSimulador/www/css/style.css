@@ -366,14 +366,11 @@ span.mensual{
     margin: 20px auto 20px;
     display: block;
 }
-.registro.sisec{
-    color: #fff !important;
-}
 .sisec.button{
     background: #1dafec;
     margin-bottom: 25px;
     width: 300px;
-    margin: auto;
+    margin: 50px auto;
     color: #fff;
     border: none;
     display: block;

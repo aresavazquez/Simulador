@@ -62,8 +62,16 @@
                 ENVIAR
             </button>
             <img src="./img/o.png" class="o2">
-            <p class="registro sisec">Ingresa desde SISEC</p>
-            <button class="sisec button"  ng-click="entrar()">
+            <p class="registro">Ingresa desde SISEC</p>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Usuario</span>
+                <input type="text" placeholder="-" ng-model="data.usuario">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Contraseña</span>
+                <input type="password" placeholder="-" ng-model="data.password">
+            </label>
+            <button class="sisec button"  ng-click="sisec()">
                 SISEC
             </button>
             <!--md-button class="button button-block button-positive face" ng-click="fbLogin()">
