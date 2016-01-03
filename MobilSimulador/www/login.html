@@ -38,7 +38,7 @@
 <body ng-app="app">
     <ion-view>
         <ion-content class="loginTab">
-        <img src="./img/logo.png" class="logoImg">
+            <img src="./img/logo.png" class="logoImg">
             <div class="list login">
                 <button class="button button-positive save facebook" ng-click="FBlogin()">
                 Ingresar con Facebook <i class="ion-social-facebook"></i>
@@ -57,28 +57,25 @@
                     <span class="input-label">Email</span>
                     <input type="text" placeholder="-" ng-model="data.correo">
                 </label>
-            </div>
-            <button class="button button-positive save" ng-click="entrar()">
-                Enviar
-            </button>
-            <img src="./img/o.png" class="o2">
+                <button class="button button-positive save" ng-click="entrar()">
+                    Enviar
+                </button>
+                <img src="./img/o.png" class="o2">
 
-            <p class="registro">Ingresa desde SISEC</p>
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Nombre de usuario</span>
-                <input type="text" placeholder="-" ng-model="data.usuario">
-            </label>
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Contraseña</span>
-                <input type="password" placeholder="-" ng-model="data.contraseña">
-            </label>
-            <button class="sisec button"  ng-click="sisec()">
+
+                <p class="registro">Registro con SISEC</p>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Nombre de usuario</span>
+                    <input type="text" placeholder="-" ng-model="data.usuario">
+                 </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Contraseña</span>
+                    <input type="password" placeholder="-" ng-model="data.apellido">
+                </label>
+            </div>
+            <button class="button button-positive save" ng-click="sisec()">
                 Iniciar sesión
             </button>
-            <!--md-button class="button button-block button-positive face" ng-click="fbLogin()">
-                <i class="ion-social-facebook"></i>
-                Inicia sesión con Facebook
-            </md-button-->
         </ion-content>
     </ion-view>
 </body>
