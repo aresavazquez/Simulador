@@ -11,9 +11,13 @@
 
     serv.factory('User', function() {
         return {
-            getLocal: function(){
+            getLocal: function () {
                 var rawUser = JSON.parse(localStorage.getItem('usuario'));
-                return {first_name: rawUser.nombre, last_name: rawUser.apellido, email: rawUser.correo};
+                if (rawUser.Valido === true) {
+                    return { first_name: rawUser.Nombre, last_name: rawUser.Apellido, email: rawUser.Correo };
+                } else {
+                    return { first_name: rawUser.nombre, last_name: rawUser.apellido, email: rawUser.correo };
+                }
             }
         }
     });
@@ -475,12 +479,52 @@
             mandar: function (datos) {
                 var variable = JSON.stringify(datos)
                 var objeto = variable.replace(/:/g, "_");
-                $http.post('http://localhost:13426/MailSvc.svc/Web/SendMail/' + objeto)
-                    .then(function (res) {
-                    return res.data;
-                }, function (err) {
-                    console.error('error', err);
+                var Mensualidad = '';
+                var Plazo = '';
+
+                if (datos.selMens === "1") {
+                    Mensualidad = 'Fija';
+                } else {
+                    Mensualidad = 'Creciente';
+                }
+
+                if (datos.selPlazo === "2") {
+                    Plazo = '15 a\u00F1os';
+                } else {
+                    Plazo = '20 a\u00F1os';
+                }
+
+                var cuerpo = 'Estimado@: ' + datos.nombre + ' se realizo una simulación con los datos siguientes: valor de inmueble: ' + datos.valorInmueble + ' ,plazo de ' +Plazo+ ' y una mensualidad de '+Mensualidad; 
+
+                var objeto2 = {
+                    Asunto: 'Simulación',
+                    cuerpo: cuerpo,
+                    destinatario: datos.correo
+                }
+
+                $http({
+                    url: 'http://wsl2.sisec.mx/api/Correo',
+                    method: "GET",
+                    params: { Asunto: objeto2.Asunto, cuerpo: cuerpo, destinatario: objeto2.destinatario}
+                    //params: { Asunto: 'prueba', cuerpo: 'prueba del correo', destinatario: 'larodriguez@socasesores.com'}
+                }).success(function (res) {
+                    var obj = res;
+                    console.log(res);
+                    //if (obj.Valido === true) {
+                    //    console.log('se envio correo');
+                    //} else if (obj.Valido === false) {
+                    //    console.log('fracaso correo');
+                    //}
+                }).error(function (res) {
+                    console.log("error de conexión server")
                 });
+
+                //$http.post('http://localhost:13426/MailSvc.svc/Web/SendMail/' + objeto)
+                //    .then(function (res) {
+                //    return res.data;
+                //}, function (err) {
+                //    console.error('error conexion con el servidor', err);
+                //});
             }
         };
     }]);

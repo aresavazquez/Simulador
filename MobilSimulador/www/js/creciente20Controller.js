@@ -36,7 +36,7 @@
             if ($state.params.idHistorial == "") {
                 data = $scope.data;
                 var myPopup = $ionicPopup.show({
-                    template: '<input type="text" placeholder="Nombre" ng-model="data.nombre" />'
+                    template: '<input type="text" required placeholder="Nombre" ng-model="data.nombre" />'
                     +'<input type="email" placeholder="Correo" ng-model="data.correo" />'
                     +'<input type="number" placeholder="Teléfono" ng-model="data.telefono" />'
                     +'<div class="card">'
@@ -84,22 +84,74 @@
                     }
                 });
             } else {
-                prospecto = Prospectos.get($state.params.idHistorial);
-                $scope.data.valorInmueble = prospecto.valorInmueble;
-                $scope.data.selEstado = prospecto.selEstado;
-                $scope.data.selMens=prospecto.selMens;
-                $scope.data.selPlazo=prospecto.selPlazo;
-                $scope.data.nombre=prospecto.nombre;
-                $scope.data.correo=prospecto.correo;
-                $scope.data.telefono=prospecto.telefono;
-                $scope.data.id= prospecto.id;
-                SendMail.mandar($scope.data);
-                $ionicPopup.alert({
-                    title: 'Correcto',
-                    template: 'Su correo se ha enviado correctamente'
-                }).then(function (res) {
-                    console.log('');
+                data = $scope.data;
+                var myPopup = $ionicPopup.show({
+                    template: '<input type="text" required placeholder="Nombre" ng-model="data.nombre" />'
+                    + '<input type="email" placeholder="Correo" ng-model="data.correo" />'
+                    + '<input type="number" placeholder="Teléfono" ng-model="data.telefono" />'
+                    + '<div class="card">'
+                    + '    <ul class="list checkAviso">'
+                    + '        <li class="item item-checkbox">'
+                    + '            <label class="checkbox">'
+                    + '                <input type="checkbox" class="acepto" ng-model="data.acepto">'
+                    + '            </label>'
+                    + '            Acepto el Aviso de Privacidad.'
+                    + '        </li>'
+                    + '    </ul>'
+                    + '    <div class="item item-text-wrap aviso">'
+                    + '        Respecto al manejo de sus datos favor de revisar el Aviso de Privacidad.'
+                    + '    </div>'
+                    + '</div>',
+                    title: 'Destinatario',
+                    subTitle: '',
+                    scope: $scope,
+                    buttons: [
+                      {
+                          text: 'Cancelar',
+                          onTap: function (e) {
+                              $scope.cancelar = true;
+                          }
+                      },
+                      {
+                          text: '<b>Mandar</b>',
+                          type: 'button-positive',
+                          onTap: function (e) {
+                              $scope.cancelar = false;
+                              return $scope.data;
+                          }
+                      }
+                    ]
                 });
+                myPopup.then(function (res) {
+                    if ($scope.cancelar === false) {
+                        SendMail.mandar($scope.data);
+                        $ionicPopup.alert({
+                            title: 'Correcto',
+                            template: 'Su correo se ha enviado correctamente'
+                        }).then(function (res) {
+                            console.log('');
+                        });
+                    }
+                });
+
+
+
+                //prospecto = Prospectos.get($state.params.idHistorial);
+                //$scope.data.valorInmueble = prospecto.valorInmueble;
+                //$scope.data.selEstado = prospecto.selEstado;
+                //$scope.data.selMens=prospecto.selMens;
+                //$scope.data.selPlazo=prospecto.selPlazo;
+                //$scope.data.nombre=prospecto.nombre;
+                //$scope.data.correo=prospecto.correo;
+                //$scope.data.telefono=prospecto.telefono;
+                //$scope.data.id= prospecto.id;
+                //SendMail.mandar($scope.data);
+                //$ionicPopup.alert({
+                //    title: 'Correcto',
+                //    template: 'Su correo se ha enviado correctamente'
+                //}).then(function (res) {
+                //    console.log('');
+                //});
             }
         };
         //Banorte
@@ -130,15 +182,15 @@
             pagoMensual: '$' + pagoMensual.formatMoney(2, '.', ','),
         });
         grpBanorte[0].members.push({ name: "Pago mensual", quantity: '$' + pagoMensual.formatMoney(2, '.', ',') });
-        grpBanorte[0].members.push({ name: "Monto del credito", quantity: '$' + montoCredito.formatMoney(2, '.', ',') });
-        grpBanorte[0].members.push({ name: "Tasa de interes", quantity: (tasaInteres * 100).toFixed(2) + '%' });
+        grpBanorte[0].members.push({ name: "Monto del crédito", quantity: '$' + montoCredito.formatMoney(2, '.', ',') });
+        grpBanorte[0].members.push({ name: "Tasa de interés", quantity: (tasaInteres * 100).toFixed(2) + '%' });
         grpBanorte[0].members.push({ name: "Ingreso requerido", quantity: '$' + ingresoRequerido.formatMoney(2, '.', ',') });
         //grpBanorte[0].members.push({ name: "Incremento anual del pago", quantity: parseFloat(banorte.incrementoAnual * 100).toFixed(2) + "%" });
         grpBanorte[0].members.push({ name: "CAT", quantity: (cat * 100).toFixed(2) + '%' });
-        grpBanorte[0].members.push({ name: "Gastos del credito", quantity: undefined });
+        grpBanorte[0].members.push({ name: "Gastos del crédito", quantity: undefined });
         grpBanorte[0].members.push({ name: "Enganche", quantity: '$' + enganche.formatMoney(2, '.', ',') });
-        grpBanorte[0].members.push({ name: "Avaluo", quantity: '$' + avaluo.formatMoney(2, '.', ',') });
-        grpBanorte[0].members.push({ name: "Comision por apertura", quantity: '$' + comisionApertura.formatMoney(2, '.', ',') });
+        grpBanorte[0].members.push({ name: "Avalúo", quantity: '$' + avaluo.formatMoney(2, '.', ',') });
+        grpBanorte[0].members.push({ name: "Comisión por apertura", quantity: '$' + comisionApertura.formatMoney(2, '.', ',') });
         grpBanorte[0].members.push({ name: "Gastos notariales", quantity: '$' + gastosNotariales.formatMoney(2, '.', ',') });
         grpBanorte[0].members.push({ name: "Desembolso total", quantity: '$' + desembolsoTotal.formatMoney(2, '.', ',') });
 
@@ -216,15 +268,15 @@
             pagoMensual: '$' + pagoMensual.formatMoney(2, '.', ','),
         });
         grpSantander[0].members.push({ name: "Pago mensual", quantity: '$' + pagoMensual.formatMoney(2, '.', ',') });
-        grpSantander[0].members.push({ name: "Monto del credito", quantity: '$' + montoCredito.formatMoney(2, '.', ',') });
-        grpSantander[0].members.push({ name: "Tasa de interes", quantity: (tasaInteres * 100).toFixed(2) + '%' });
+        grpSantander[0].members.push({ name: "Monto del crédito", quantity: '$' + montoCredito.formatMoney(2, '.', ',') });
+        grpSantander[0].members.push({ name: "Tasa de interés", quantity: (tasaInteres * 100).toFixed(2) + '%' });
         grpSantander[0].members.push({ name: "Ingreso requerido", quantity: '$' + ingresoRequerido.formatMoney(2, '.', ',') });
         //grpSantander[0].members.push({ name: "Incremento anual del pago", quantity: parseFloat(banorte.incrementoAnual * 100).toFixed(2) + "%" });
         grpSantander[0].members.push({ name: "CAT", quantity: (cat * 100).toFixed(2) + '%' });
-        grpSantander[0].members.push({ name: "Gastos del credito", quantity: undefined });
+        grpSantander[0].members.push({ name: "Gastos del crédito", quantity: undefined });
         grpSantander[0].members.push({ name: "Enganche", quantity: '$' + enganche.formatMoney(2, '.', ',') });
-        grpSantander[0].members.push({ name: "Avaluo", quantity: '$' + avaluo.formatMoney(2, '.', ',') });
-        grpSantander[0].members.push({ name: "Comision por apertura", quantity: '$' + comisionApertura.formatMoney(2, '.', ',') });
+        grpSantander[0].members.push({ name: "Avalúo", quantity: '$' + avaluo.formatMoney(2, '.', ',') });
+        grpSantander[0].members.push({ name: "Comisión por apertura", quantity: '$' + comisionApertura.formatMoney(2, '.', ',') });
         grpSantander[0].members.push({ name: "Gastos notariales", quantity: '$' + gastosNotariales.formatMoney(2, '.', ',') });
         grpSantander[0].members.push({ name: "Desembolso total", quantity: '$' + desembolsoTotal.formatMoney(2, '.', ',') });
 
@@ -300,15 +352,15 @@
             pagoMensual: '$' + pagoMensual.formatMoney(2, '.', ','),
         });
         grpScotiabank[0].members.push({ name: "Pago mensual", quantity: '$' + pagoMensual.formatMoney(2, '.', ',') });
-        grpScotiabank[0].members.push({ name: "Monto del credito", quantity: '$' + montoCredito.formatMoney(2, '.', ',') });
-        grpScotiabank[0].members.push({ name: "Tasa de interes", quantity: (tasaInteres * 100).toFixed(2) + '%' });
+        grpScotiabank[0].members.push({ name: "Monto del crédito", quantity: '$' + montoCredito.formatMoney(2, '.', ',') });
+        grpScotiabank[0].members.push({ name: "Tasa de interés", quantity: (tasaInteres * 100).toFixed(2) + '%' });
         grpScotiabank[0].members.push({ name: "Ingreso requerido", quantity: '$' + ingresoRequerido.formatMoney(2, '.', ',') });
         //grpScotiabank[0].members.push({ name: "Incremento anual del pago", quantity: parseFloat(banorte.incrementoAnual * 100).toFixed(2) + "%" });
         grpScotiabank[0].members.push({ name: "CAT", quantity: (cat * 100).toFixed(2) + '%' });
-        grpScotiabank[0].members.push({ name: "Gastos del credito", quantity: undefined });
+        grpScotiabank[0].members.push({ name: "Gastos del crédito", quantity: undefined });
         grpScotiabank[0].members.push({ name: "Enganche", quantity: '$' + enganche.formatMoney(2, '.', ',') });
-        grpScotiabank[0].members.push({ name: "Avaluo", quantity: '$' + avaluo.formatMoney(2, '.', ',') });
-        grpScotiabank[0].members.push({ name: "Comision por apertura", quantity: '$' + comisionApertura.formatMoney(2, '.', ',') });
+        grpScotiabank[0].members.push({ name: "Avalúo", quantity: '$' + avaluo.formatMoney(2, '.', ',') });
+        grpScotiabank[0].members.push({ name: "Comisión por apertura", quantity: '$' + comisionApertura.formatMoney(2, '.', ',') });
         grpScotiabank[0].members.push({ name: "Gastos notariales", quantity: '$' + gastosNotariales.formatMoney(2, '.', ',') });
         grpScotiabank[0].members.push({ name: "Desembolso total", quantity: '$' + desembolsoTotal.formatMoney(2, '.', ',') });
 
@@ -385,15 +437,15 @@
             pagoMensual: '$' + pagoMensual.formatMoney(2, '.', ','),
         });
         grpBancomer[0].members.push({ name: "Pago mensual", quantity: '$' + pagoMensual.formatMoney(2, '.', ',') });
-        grpBancomer[0].members.push({ name: "Monto del credito", quantity: '$' + montoCredito.formatMoney(2, '.', ',') });
-        grpBancomer[0].members.push({ name: "Tasa de interes", quantity: (tasaInteres * 100).toFixed(2) + '%' });
+        grpBancomer[0].members.push({ name: "Monto del crédito", quantity: '$' + montoCredito.formatMoney(2, '.', ',') });
+        grpBancomer[0].members.push({ name: "Tasa de interés", quantity: (tasaInteres * 100).toFixed(2) + '%' });
         grpBancomer[0].members.push({ name: "Ingreso requerido", quantity: '$' + ingresoRequerido.formatMoney(2, '.', ',') });
         //grpBancomer[0].members.push({ name: "Incremento anual del pago", quantity: parseFloat(banorte.incrementoAnual * 100).toFixed(2) + "%" });
         grpBancomer[0].members.push({ name: "CAT", quantity: (cat * 100).toFixed(2) + '%' });
-        grpBancomer[0].members.push({ name: "Gastos del credito", quantity: undefined });
+        grpBancomer[0].members.push({ name: "Gastos del crédito", quantity: undefined });
         grpBancomer[0].members.push({ name: "Enganche", quantity: '$' + enganche.formatMoney(2, '.', ',') });
-        grpBancomer[0].members.push({ name: "Avaluo", quantity: '$' + avaluo.formatMoney(2, '.', ',') });
-        grpBancomer[0].members.push({ name: "Comision por apertura", quantity: '$' + comisionApertura.formatMoney(2, '.', ',') });
+        grpBancomer[0].members.push({ name: "Avalúo", quantity: '$' + avaluo.formatMoney(2, '.', ',') });
+        grpBancomer[0].members.push({ name: "Comisión por apertura", quantity: '$' + comisionApertura.formatMoney(2, '.', ',') });
         grpBancomer[0].members.push({ name: "Gastos notariales", quantity: '$' + gastosNotariales.formatMoney(2, '.', ',') });
         grpBancomer[0].members.push({ name: "Desembolso total", quantity: '$' + desembolsoTotal.formatMoney(2, '.', ',') });
 
@@ -469,15 +521,15 @@
             pagoMensual: '$' + pagoMensual.formatMoney(2, '.', ','),
         });
         grpAfirme[0].members.push({ name: "Pago mensual", quantity: '$' + pagoMensual.formatMoney(2, '.', ',') });
-        grpAfirme[0].members.push({ name: "Monto del credito", quantity: '$' + montoCredito.formatMoney(2, '.', ',') });
-        grpAfirme[0].members.push({ name: "Tasa de interes", quantity: (tasaInteres * 100).toFixed(2) + '%' });
+        grpAfirme[0].members.push({ name: "Monto del crédito", quantity: '$' + montoCredito.formatMoney(2, '.', ',') });
+        grpAfirme[0].members.push({ name: "Tasa de interés", quantity: (tasaInteres * 100).toFixed(2) + '%' });
         grpAfirme[0].members.push({ name: "Ingreso requerido", quantity: '$' + ingresoRequerido.formatMoney(2, '.', ',') });
         //grpAfirme[0].members.push({ name: "Incremento anual del pago", quantity: parseFloat(banorte.incrementoAnual * 100).toFixed(2) + "%" });
         grpAfirme[0].members.push({ name: "CAT", quantity: (cat * 100).toFixed(2) + '%' });
-        grpAfirme[0].members.push({ name: "Gastos del credito", quantity: undefined });
+        grpAfirme[0].members.push({ name: "Gastos del crédito", quantity: undefined });
         grpAfirme[0].members.push({ name: "Enganche", quantity: '$' + enganche.formatMoney(2, '.', ',') });
-        grpAfirme[0].members.push({ name: "Avaluo", quantity: '$' + avaluo.formatMoney(2, '.', ',') });
-        grpAfirme[0].members.push({ name: "Comision por apertura", quantity: '$' + comisionApertura.formatMoney(2, '.', ',') });
+        grpAfirme[0].members.push({ name: "Avalúo", quantity: '$' + avaluo.formatMoney(2, '.', ',') });
+        grpAfirme[0].members.push({ name: "Comisión por apertura", quantity: '$' + comisionApertura.formatMoney(2, '.', ',') });
         grpAfirme[0].members.push({ name: "Gastos notariales", quantity: '$' + gastosNotariales.formatMoney(2, '.', ',') });
         grpAfirme[0].members.push({ name: "Desembolso total", quantity: '$' + desembolsoTotal.formatMoney(2, '.', ',') });
 
@@ -553,15 +605,15 @@
             pagoMensual: '$' + pagoMensual.formatMoney(2, '.', ','),
         });
         grpHSBC[0].members.push({ name: "Pago mensual", quantity: '$' + pagoMensual.formatMoney(2, '.', ',') });
-        grpHSBC[0].members.push({ name: "Monto del credito", quantity: '$' + montoCredito.formatMoney(2, '.', ',') });
-        grpHSBC[0].members.push({ name: "Tasa de interes", quantity: (tasaInteres * 100).toFixed(2) + '%' });
+        grpHSBC[0].members.push({ name: "Monto del crédito", quantity: '$' + montoCredito.formatMoney(2, '.', ',') });
+        grpHSBC[0].members.push({ name: "Tasa de interés", quantity: (tasaInteres * 100).toFixed(2) + '%' });
         grpHSBC[0].members.push({ name: "Ingreso requerido", quantity: '$' + ingresoRequerido.formatMoney(2, '.', ',') });
         //grpHSBC[0].members.push({ name: "Incremento anual del pago", quantity: parseFloat(banorte.incrementoAnual * 100).toFixed(2) + "%" });
         grpHSBC[0].members.push({ name: "CAT", quantity: (cat * 100).toFixed(2) + '%' });
-        grpHSBC[0].members.push({ name: "Gastos del credito", quantity: undefined });
+        grpHSBC[0].members.push({ name: "Gastos del crédito", quantity: undefined });
         grpHSBC[0].members.push({ name: "Enganche", quantity: '$' + enganche.formatMoney(2, '.', ',') });
-        grpHSBC[0].members.push({ name: "Avaluo", quantity: '$' + avaluo.formatMoney(2, '.', ',') });
-        grpHSBC[0].members.push({ name: "Comision por apertura", quantity: '$' + comisionApertura.formatMoney(2, '.', ',') });
+        grpHSBC[0].members.push({ name: "Avalúo", quantity: '$' + avaluo.formatMoney(2, '.', ',') });
+        grpHSBC[0].members.push({ name: "Comisión por apertura", quantity: '$' + comisionApertura.formatMoney(2, '.', ',') });
         grpHSBC[0].members.push({ name: "Gastos notariales", quantity: '$' + gastosNotariales.formatMoney(2, '.', ',') });
         grpHSBC[0].members.push({ name: "Desembolso total", quantity: '$' + desembolsoTotal.formatMoney(2, '.', ',') });
 

@@ -11,8 +11,8 @@
             return groups[group];
         })
     };
-    function calcula(prospect, $state, $ionicPopup) {
-        if (prospect.valorInmueble === null) {
+    function calcula(prospect, $state) {
+        if (prospect.valor === null) {
             muestraMensaje("Error", "No es posible realizar el c&aacute;lculo debido a que no ha ingresado un valor del inmueble");
         } else {
             if (prospect.selMens === "2") {
@@ -22,7 +22,7 @@
                     }
                     else {
                         $state.go("app.tabs.hresultado20Creciente", {
-                            valor: prospect.valorInmueble,
+                            valor: prospect.valor - prospect.enganche,
                             selMens: prospect.selMens,
                             selEstado: prospect.selEstado,
                             selPlazo: prospect.selPlazo,
@@ -36,7 +36,7 @@
                     }
                     else {
                         $state.go("app.tabs.hresultado15Creciente", {
-                            valor: prospect.valorInmueble,
+                            valor: prospect.valor - prospect.enganche,
                             selMens: prospect.selMens,
                             selEstado: prospect.selEstado,
                             selPlazo: prospect.selPlazo,
@@ -55,7 +55,7 @@
                     }
                     else {
                         $state.go("app.tabs.hresultado20Fijo", {
-                            valor: prospect.valorInmueble,
+                            valor: prospect.valor- prospect.enganche,
                             selMens: prospect.selMens,
                             selEstado: prospect.selEstado,
                             selPlazo: prospect.selPlazo,
@@ -69,7 +69,7 @@
                     }
                     else {
                         $state.go("app.tabs.hresultado15Fijo", {
-                            valor: prospect.valorInmueble,
+                            valor: prospect.valor - prospect.enganche,
                             selMens: prospect.selMens,
                             selEstado: prospect.selEstado,
                             selPlazo: prospect.selPlazo,
@@ -87,12 +87,12 @@
         }
     }
 
-    control.controller('HistoryListCtrl', function ($scope, $state, $stateParams, Prospectos, $ionicPopup) {
+    control.controller('HistoryListCtrl', function ($scope, $state, $stateParams, Prospectos) {
         $scope.prospectos = Prospectos.getByDate($stateParams.fec);
 
         $scope.resultado = function (id) {
             prospect = Prospectos.get(id);
-            calcula(prospect, $state, $ionicPopup);
+            calcula(prospect, $state);
         };
 
     });

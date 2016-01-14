@@ -17,16 +17,51 @@
         }
     });
 
-    control.controller('LoginCtrl', function ($scope, $state, $ionicModal, $ionicPopup, $timeout, ngFB) {
+    control.controller('LoginCtrl', function ($scope, $state, $ionicModal, $ionicPopup, $timeout, ngFB,$http) {
         $scope.data = {
             nombre: '',
             apellido: '',
             correo: '',
-            foto: ''
+            foto: '',
+            usuario:'',
+            passwd:''
         };
 
         if(localStorage.getItem('accessToken') || localStorage.getItem('usuario')){
             $state.go("app.tabs.datos");
+        };
+
+        $scope.sisec = function (user,passwd) {
+            //var user = user;
+            //var passwd = passwd;
+
+            if (user === '' ||
+                passwd === '') {
+                muestraMensaje("Error", "Alguno de los campos se encuentra vacio", $ionicPopup);
+            } else {
+
+                $http({
+                    url: 'http://wsl2.sisec.mx/api/login',
+                    method: "GET",
+                    params: { user: user, passwd: passwd }
+                }).success(function (data) {
+                    var obj = data;
+                    console.log(data);
+                    console.log(obj.Valido);
+
+                    if (obj.Valido === true) {
+                        console.log('inicio sesion');
+                        angular.lowercase(data);
+
+                        window.localStorage.setItem('usuario', JSON.stringify(data));
+                        $state.go("app.tabs.datos");
+                    } else if (obj.Valido === false) {
+                        console.log('fracaso sesion');
+                        muestraMensaje("Error", "el usuario o la Contrase\u00F1a son incorrectos", $ionicPopup);
+                    }
+
+                })
+            }
         };
 
         $scope.entrar = function () {
@@ -35,12 +70,15 @@
                 $scope.data.correo === '') {
                 muestraMensaje("Error", "Debe rellenar los campos de registro para continuar", $ionicPopup);
             } else {
+
+                $http.post('http://wsl2.sisec.mx/api/Registro', $scope.data);
                 window.localStorage.setItem('usuario', JSON.stringify($scope.data));
                 //$state.go("app.tabs.dash");
                 $state.go("app.tabs.datos");
             }
             
         };
+
         $scope.FBlogin = function() {
             ngFB.login({scope: 'email'}).then(
                 function(response){
@@ -60,7 +98,7 @@
         }
     });
 
-    control.controller('HomeCtrl', function($scope, ngFB, User){
+    control.controller('HomeCtrl', function($scope, ngFB, User,$http){
         if(localStorage.getItem("accessToken")){
             ngFB.api({
                 path: '/me',
@@ -71,10 +109,9 @@
             }, function (error) {
                 alert('Facebook error: ' + error.error_description);
             });
-        }else{
+        } else {
             $scope.user = User.getLocal();
-        }
-        
+        } 
     });
 
     control.controller('DashCtrl', function ($scope, $state, Estados, Plazos, Mensualidades,
@@ -88,6 +125,7 @@
             nombre: '',
             correo: '',
             telefono: '',
+            enganche:null
         };
         $scope.estados = Estados.all();
         $scope.plazos = Plazos.all();

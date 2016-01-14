@@ -2,8 +2,9 @@
     var control = angular.module('app.controllers');
 
     control.controller('SimulaCtrl', function ($scope, $ionicPopup, $state, $ionicPopup,
-        Estados, Plazos, Mensualidades) {
+        Estados, Plazos, Mensualidades, Prospectos) {
         $scope.data = {
+            enganche: null,
             valor: null,
             selMens: 0,
             selPlazo: 0,
@@ -24,8 +25,19 @@
                                 muestraMensaje("Error", "No es posible realizar el c&aacute;lculo debido a que no ha seleccionado un estado");
                             }
                             else {
+
+                                meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Diciembre', 'Diciembre']
+                                var now = new Date();
+                                $scope.data.id = now.getTime().toString();
+                                $scope.data.fecha = now.getDate() + '/' + meses[now.getMonth()] + '/' + now.getFullYear();
+                                data = angular.copy($scope.data);
+                                Prospectos.add(data);
+                                
+                                //$state.go("app.tabs.historial");
+
                                 $state.go("app.tabs.resultado20Creciente", {
-                                    valor: $scope.data.valor,
+
+                                    valor: $scope.data.valor - $scope.data.enganche,
                                     selMens: $scope.data.selMens,
                                     selEstado: $scope.data.selEstado,
                                     selPlazo: $scope.data.selPlazo,
@@ -38,8 +50,16 @@
                                 muestraMensaje("Error", "No es posible realizar el c&aacute;lculo debido a que no ha seleccionado un estado");
                             }
                             else {
+
+                                meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Diciembre', 'Diciembre']
+                                var now = new Date();
+                                $scope.data.id = now.getTime().toString();
+                                $scope.data.fecha = now.getDate() + '/' + meses[now.getMonth()] + '/' + now.getFullYear();
+                                data = angular.copy($scope.data);
+                                Prospectos.add(data);
+
                                 $state.go("app.tabs.resultado15Creciente", {
-                                    valor: $scope.data.valor,
+                                    valor: $scope.data.valor - $scope.data.enganche,
                                     selMens: $scope.data.selMens,
                                     selEstado: $scope.data.selEstado,
                                     selPlazo: $scope.data.selPlazo,
@@ -57,8 +77,16 @@
                                 muestraMensaje("Error", "No es posible realizar el c&aacute;lculo debido a que no ha seleccionado un estado");
                             }
                             else {
+                                meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Diciembre', 'Diciembre']
+                                var now = new Date();
+                                $scope.data.id = now.getTime().toString();
+                                $scope.data.fecha = now.getDate() + '/' + meses[now.getMonth()] + '/' + now.getFullYear();
+                                data = angular.copy($scope.data);
+                                Prospectos.add(data);
+
+
                                 $state.go("app.tabs.resultado20Fijo", {
-                                    valor: $scope.data.valor,
+                                    valor: $scope.data.valor - $scope.data.enganche,
                                     selMens: $scope.data.selMens,
                                     selEstado: $scope.data.selEstado,
                                     selPlazo: $scope.data.selPlazo,
@@ -71,8 +99,16 @@
                                 muestraMensaje("Error", "No es posible realizar el c&aacute;lculo debido a que no ha seleccionado un estado");
                             }
                             else {
+                                meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Diciembre', 'Diciembre']
+                                var now = new Date();
+                                $scope.data.id = now.getTime().toString();
+                                $scope.data.fecha = now.getDate() + '/' + meses[now.getMonth()] + '/' + now.getFullYear();
+                                data = angular.copy($scope.data);
+                                console.log(data);
+                                Prospectos.add(data);
+
                                 $state.go("app.tabs.resultado15Fijo", {
-                                    valor: $scope.data.valor,
+                                    valor: $scope.data.valor - $scope.data.enganche,
                                     selMens: $scope.data.selMens,
                                     selEstado: $scope.data.selEstado,
                                     selPlazo: $scope.data.selPlazo,
