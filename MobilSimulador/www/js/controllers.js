@@ -10,6 +10,7 @@
 
         });
     }
+
     control.controller('AppCtrl', function($scope, $state){
         $scope.closeSession = function() {
             localStorage.clear();

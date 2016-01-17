@@ -2,7 +2,7 @@
     var control = angular.module('app.controllers');
 
     control.controller('Res15CrecienteCtrl', function ($scope, $state, $ionicPopup,
-        Simula, Avaluos, Calculos, GastosNotariales, SendMail, Prospectos) {
+        Simula, Avaluos, Calculos, GastosNotariales, SendMail, Prospectos, $http) {
         $scope.data = {
             valorInmueble: null,
             selEstado: 0,
@@ -12,11 +12,14 @@
             correo: '',
             telefono: '',
         };
+        var prospecto = Prospectos.get($state.params.idHistorial);
+
         $scope.cancelar = false;
-        $scope.data.valorInmueble = $state.params.valor;
-        $scope.data.selEstado = $state.params.selEstado;
-        $scope.data.selMens = $state.params.selMens;
-        $scope.data.selPlazo = $state.params.selPlazo;
+        $scope.data.enganche = parseFloat(prospecto.enganche);
+        $scope.data.valorInmueble = parseFloat($state.params.valor);
+        $scope.data.selEstado = parseInt($state.params.selEstado, 10);
+        $scope.data.selMens = parseInt($state.params.selMens, 10);
+        $scope.data.selPlazo = parseInt($state.params.selPlazo, 10);
 
         $scope.valor = $state.params.valor;
         $scope.selEstado = $state.params.selEstado;
@@ -77,13 +80,23 @@
                 });
                 myPopup.then(function (res) {
                     if ($scope.cancelar === false) {
-                        SendMail.mandar($scope.data);
-                        $ionicPopup.alert({
-                            title: 'Correcto',
-                            template: 'Su correo se ha enviado correctamente'
-                        }).then(function (res) {
-                            console.log('');
-                        });
+
+                        if ($scope.data.acepto === true) {
+                            SendMail.mandar($scope.data);
+                            $ionicPopup.alert({
+                                title: 'Correcto',
+                                template: 'Su correo se ha enviado correctamente'
+                            }).then(function (res) {
+                                console.log('');
+                            });
+                        } else {
+                            $ionicPopup.alert({
+                                title: 'Error',
+                                template: 'Debe aceptar los terminos de privacidad.'
+                            }).then(function (res) {
+                                console.log('');
+                            });
+                        }
                     }
                 });
             } else {
@@ -127,305 +140,266 @@
                 });
                 myPopup.then(function (res) {
                     if ($scope.cancelar === false) {
-                        SendMail.mandar($scope.data);
-                        $ionicPopup.alert({
-                            title: 'Correcto',
-                            template: 'Su correo se ha enviado correctamente'
-                        }).then(function (res) {
-                            console.log('');
-                        });
+
+                        if ($scope.data.acepto === true) {
+                            SendMail.mandar($scope.data);
+                            //$ionicPopup.alert({
+                            //    title: 'Correcto',
+                            //    template: 'Su correo se ha enviado correctamente'
+                            //}).then(function (res) {
+                            //    console.log('');
+                            //});
+                        } else {
+                            $ionicPopup.alert({
+                                title: 'Error',
+                                template: 'Debe aceptar los terminos de privacidad.'
+                            }).then(function (res) {
+                                console.log('');
+                            });
+                        }
                     }
                 });
-
-
-
-
-                //prospecto = Prospectos.get($state.params.idHistorial);
-                //$scope.data.valorInmueble = prospecto.valor;
-                //$scope.data.selEstado = prospecto.selEstado;
-                //$scope.data.selMens = prospecto.selMens;
-                //$scope.data.selPlazo = prospecto.selPlazo;
-                //$scope.data.nombre = prospecto.nombre;
-                //$scope.data.correo = prospecto.correo;
-                //$scope.data.telefono = prospecto.telefono;
-                //$scope.data.id = prospecto.id;
-                //SendMail.mandar($scope.data);
-                //$ionicPopup.alert({
-                //    title: 'Correcto',
-                //    template: 'Su correo se ha enviado correctamente'
-                //}).then(function (res) {
-                //});
             }
         };
+        //Banorte 1
+        //console.log('adasdas',$scope.data);
+        //webService consume...
+        $http({
+            url: 'http://wsl2.sisec.mx/api/Simulador',
+            method: "GET",
+            params: { idbanco: 1, vi: $scope.data.valorInmueble, plzo: $scope.data.selPlazo, estado: $scope.data.selEstado, msld: $scope.data.selMens, eng: $scope.data.enganche }
+        }).success(function (respuesta) {
+            var bank = respuesta;
+            //console.log(respuesta);
 
+            var grpBanorte = [];
+            grpBanorte.push({
+                name: bank.banco,
+                members: [],
+                pagoMensual: '$' + bank.pagomnsl.formatMoney(2, '.', ','),
+            });
+            grpBanorte[0].members.push({ name: "Pago mensual", quantity: '$' + bank.pagomnsl.formatMoney(2, '.', ',') });
+            grpBanorte[0].members.push({ name: "Monto del crédito", quantity: '$' + bank.montocredito.formatMoney(2, '.', ',') });
+            grpBanorte[0].members.push({ name: "Tasa de interés", quantity: (bank.tasa).toFixed(2) + '%' });
+            grpBanorte[0].members.push({ name: "Ingreso requerido", quantity: '$' + bank.ingreso.formatMoney(2, '.', ',') });
+            grpBanorte[0].members.push({ name: "Incremento anual del pago", quantity: parseFloat(bank.incremento).toFixed(2) + "%" });
+            grpBanorte[0].members.push({ name: "CAT", quantity: (bank.cat).toFixed(2) + '%' });
+            grpBanorte[0].members.push({ name: "Gastos del crédito", quantity: undefined });
+            grpBanorte[0].members.push({ name: "Enganche", quantity: '$' + bank.enganche.formatMoney(2, '.', ',') });
+            grpBanorte[0].members.push({ name: "Avalúo", quantity: '$' + bank.avaluo.formatMoney(2, '.', ',') });
+            grpBanorte[0].members.push({ name: "Comisión por apertura", quantity: '$' + bank.comaper.formatMoney(2, '.', ',') });
+            grpBanorte[0].members.push({ name: "Gastos notariales", quantity: '$' + bank.gastonot.formatMoney(2, '.', ',') });
+            grpBanorte[0].members.push({ name: "Desembolso total", quantity: '$' + bank.desembolso.formatMoney(2, '.', ',') });
 
-
-        //Banorte
-        banorte = Simula.getForCalc(1, $scope.selMens, $scope.selPlazo);
-
-        aforo = banorte.aforo;
-        factorPago = banorte.factorDePago;
-        tasaInteres = banorte.tasaDeInteres;
-        cat = banorte.cat;
-
-        montoCredito = Calculos.calculaMotoDelCredito(banorte.aforo, $scope.valor);
-        pagoMensual = Calculos.calcularPagoMensual(montoCredito, factorPago);
-        ingresoRequerido = Calculos.calculoIngresoRequeridoCreciente(pagoMensual, 1);
-
-        enganche = Calculos.calculoEnganche($scope.valor, montoCredito);
-        avaluo = Calculos.calcularAvaluoCreciente($scope.valor, 1, Avaluos);
-        comisionApertura = Calculos.calculoComisionApertura(montoCredito, 1);
-        gastosNotariales = Calculos.calculoGastosNotariales($scope.valor, gastosNotarialesXEstado);
-
-        desembolsoTotal = parseFloat(enganche) + parseFloat(avaluo) + parseFloat(comisionApertura) + parseFloat(gastosNotariales);
-        var grpBanorte = [];
-        grpBanorte.push({
-            name: banorte.nombreBanco,
-            pagoMensual: '$' + pagoMensual.formatMoney(2, '.', ','),
-            members: []
+            $scope.grupoBanorte = grpBanorte;
+        }).error(function (res) {
+            console.log("error de conexión server")
         });
-
-        grpBanorte[0].members.push({ name: "Pago mensual", quantity: '$' + pagoMensual.formatMoney(2, '.', ',') });
-        grpBanorte[0].members.push({ name: "Monto del crédito", quantity: '$' + montoCredito.formatMoney(2, '.', ',') });
-        grpBanorte[0].members.push({ name: "Tasa de interés", quantity: (tasaInteres * 100).toFixed(2) + '%' });
-        grpBanorte[0].members.push({ name: "Ingreso requerido", quantity: '$' + ingresoRequerido.formatMoney(2, '.', ',') });
-        grpBanorte[0].members.push({ name: "Incremento anual del pago", quantity: parseFloat(banorte.incrementoAnual * 100).toFixed(2) + "%" });
-        grpBanorte[0].members.push({ name: "CAT", quantity: (cat * 100).toFixed(2) + '%' });
-        grpBanorte[0].members.push({ name: "Gastos del crédito", quantity: undefined });
-        grpBanorte[0].members.push({ name: "Enganche", quantity: '$' + enganche.formatMoney(2, '.', ',') });
-        grpBanorte[0].members.push({ name: "Avalúo", quantity: '$' + avaluo.formatMoney(2, '.', ',') });
-        grpBanorte[0].members.push({ name: "Comisión por apertura", quantity: '$' + comisionApertura.formatMoney(2, '.', ',') });
-        grpBanorte[0].members.push({ name: "Gastos notariales", quantity: '$' + gastosNotariales.formatMoney(2, '.', ',') });
-        grpBanorte[0].members.push({ name: "Desembolso total", quantity: '$' + desembolsoTotal.formatMoney(2, '.', ',') });
-        $scope.grupoBanorte = grpBanorte;
-
-        aforo = 0;
-        factorPago = 0;
-        tasaInteres = 0;
-        cat = 0;
-        montoCredito = 0;
-        pagoMensual = 0;
-        ingresoRequerido = 0;
-        enganche = 0;
-        avaluo = 0;
-        comisionApertura = 0;
-        gastosNotariales = 0;
-        desembolsoTotal = 0;
-
-        // Santander
-        santander = Simula.getForCalc(2, $scope.selMens, $scope.selPlazo);
+        ////////////////////////////////////////////////////
 
 
-        aforo = santander.aforo;
-        factorPago = santander.factorDePago;
-        tasaInteres = santander.tasaDeInteres;
-        cat = santander.cat;
+        // Santander 2
+        $http({
+            url: 'http://wsl2.sisec.mx/api/Simulador',
+            method: "GET",
+            params: { idbanco: 2, vi: $scope.data.valorInmueble, plzo: $scope.data.selPlazo, estado: $scope.data.selEstado, msld: $scope.data.selMens, eng: $scope.data.enganche }
+        }).success(function (respuesta) {
+            var bank = respuesta;
+            //console.log(respuesta);
 
-        montoCredito = Calculos.calculaMotoDelCredito(santander.aforo, $scope.valor);
-        pagoMensual = Calculos.calcularPagoMensual(montoCredito, factorPago);
-        ingresoRequerido = Calculos.calculoIngresoRequeridoCreciente(pagoMensual, 2);
+            var grpSantander = [];
+            grpSantander.push({
+                name: bank.banco,
+                members: [],
+                pagoMensual: '$' + bank.pagomnsl.formatMoney(2, '.', ','),
+            });
+            grpSantander[0].members.push({ name: "Pago mensual", quantity: '$' + bank.pagomnsl.formatMoney(2, '.', ',') });
+            grpSantander[0].members.push({ name: "Monto del crédito", quantity: '$' + bank.montocredito.formatMoney(2, '.', ',') });
+            grpSantander[0].members.push({ name: "Tasa de interés", quantity: (bank.tasa).toFixed(2) + '%' });
+            grpSantander[0].members.push({ name: "Ingreso requerido", quantity: '$' + bank.ingreso.formatMoney(2, '.', ',') });
+            grpSantander[0].members.push({ name: "Incremento anual del pago", quantity: parseFloat(bank.incremento).toFixed(2) + "%" });
+            grpSantander[0].members.push({ name: "CAT", quantity: (bank.cat).toFixed(2) + '%' });
+            grpSantander[0].members.push({ name: "Gastos del crédito", quantity: undefined });
+            grpSantander[0].members.push({ name: "Enganche", quantity: '$' + bank.enganche.formatMoney(2, '.', ',') });
+            grpSantander[0].members.push({ name: "Avalúo", quantity: '$' + bank.avaluo.formatMoney(2, '.', ',') });
+            grpSantander[0].members.push({ name: "Comisión por apertura", quantity: '$' + bank.comaper.formatMoney(2, '.', ',') });
+            grpSantander[0].members.push({ name: "Gastos notariales", quantity: '$' + bank.gastonot.formatMoney(2, '.', ',') });
+            grpSantander[0].members.push({ name: "Desembolso total", quantity: '$' + bank.desembolso.formatMoney(2, '.', ',') });
 
-        enganche = Calculos.calculoEnganche($scope.valor, montoCredito);
-        avaluo = Calculos.calcularAvaluoCreciente($scope.valor, 2, Avaluos);
-        comisionApertura = Calculos.calculoComisionApertura(montoCredito, 2);
-        gastosNotariales = Calculos.calculoGastosNotariales($scope.valor, gastosNotarialesXEstado);
-
-        desembolsoTotal = parseFloat(enganche) + parseFloat(avaluo) + parseFloat(comisionApertura) + parseFloat(gastosNotariales);
-        var grpSantander = [];
-        grpSantander.push({
-            name: santander.nombreBanco,
-            pagoMensual: '$' + pagoMensual.formatMoney(2, '.', ','),
-            members: []
+            $scope.grupoSantander = grpSantander;
+        }).error(function (res) {
+            console.log("error de conexión server")
         });
+        ////////////////////////////////////////////////////
 
-        grpSantander[0].members.push({ name: "Pago mensual", quantity: '$' + pagoMensual.formatMoney(2, '.', ',') });
-        grpSantander[0].members.push({ name: "Monto del crédito", quantity: '$' + montoCredito.formatMoney(2, '.', ',') });
-        grpSantander[0].members.push({ name: "Tasa de interés", quantity: (tasaInteres * 100).toFixed(2) + '%' });
-        grpSantander[0].members.push({ name: "Ingreso requerido", quantity: '$' + ingresoRequerido.formatMoney(2, '.', ',') });
-        grpSantander[0].members.push({ name: "Incremento anual del pago", quantity: parseFloat(banorte.incrementoAnual * 100).toFixed(2) + "%" });
-        grpSantander[0].members.push({ name: "CAT", quantity: (cat * 100).toFixed(2) + '%' });
-        grpSantander[0].members.push({ name: "Gastos del crédito", quantity: undefined });
-        grpSantander[0].members.push({ name: "Enganche", quantity: '$' + enganche.formatMoney(2, '.', ',') });
-        grpSantander[0].members.push({ name: "Avalúo", quantity: '$' + avaluo.formatMoney(2, '.', ',') });
-        grpSantander[0].members.push({ name: "Comisión por apertura", quantity: '$' + comisionApertura.formatMoney(2, '.', ',') });
-        grpSantander[0].members.push({ name: "Gastos notariales", quantity: '$' + gastosNotariales.formatMoney(2, '.', ',') });
-        grpSantander[0].members.push({ name: "Desembolso total", quantity: '$' + desembolsoTotal.formatMoney(2, '.', ',') });
+        // Scotiabank 3
+        $http({
+            url: 'http://wsl2.sisec.mx/api/Simulador',
+            method: "GET",
+            params: { idbanco: 3, vi: $scope.data.valorInmueble, plzo: $scope.data.selPlazo, estado: $scope.data.selEstado, msld: $scope.data.selMens, eng: $scope.data.enganche }
+        }).success(function (respuesta) {
+            var bank = respuesta;
+            console.log(respuesta);
 
-        $scope.grupoSantander = grpSantander;
+            var grpScotiabank = [];
+            grpScotiabank.push({
+                name: bank.banco,
+                members: [],
+                pagoMensual: '$' + bank.pagomnsl.formatMoney(2, '.', ','),
+            });
+            grpScotiabank[0].members.push({ name: "Pago mensual", quantity: '$' + bank.pagomnsl.formatMoney(2, '.', ',') });
+            grpScotiabank[0].members.push({ name: "Monto del crédito", quantity: '$' + bank.montocredito.formatMoney(2, '.', ',') });
+            grpScotiabank[0].members.push({ name: "Tasa de interés", quantity: (bank.tasa).toFixed(2) + '%' });
+            grpScotiabank[0].members.push({ name: "Ingreso requerido", quantity: '$' + bank.ingreso.formatMoney(2, '.', ',') });
+            grpScotiabank[0].members.push({ name: "Incremento anual del pago", quantity: parseFloat(bank.incremento).toFixed(2) + "%" });
+            grpScotiabank[0].members.push({ name: "CAT", quantity: (bank.cat).toFixed(2) + '%' });
+            grpScotiabank[0].members.push({ name: "Gastos del crédito", quantity: undefined });
+            grpScotiabank[0].members.push({ name: "Enganche", quantity: '$' + bank.enganche.formatMoney(2, '.', ',') });
+            grpScotiabank[0].members.push({ name: "Avalúo", quantity: '$' + bank.avaluo.formatMoney(2, '.', ',') });
+            grpScotiabank[0].members.push({ name: "Comisión por apertura", quantity: '$' + bank.comaper.formatMoney(2, '.', ',') });
+            grpScotiabank[0].members.push({ name: "Gastos notariales", quantity: '$' + bank.gastonot.formatMoney(2, '.', ',') });
+            grpScotiabank[0].members.push({ name: "Desembolso total", quantity: '$' + bank.desembolso.formatMoney(2, '.', ',') });
 
-        aforo = 0;
-        factorPago = 0;
-        tasaInteres = 0;
-        cat = 0;
-        montoCredito = 0;
-        pagoMensual = 0;
-        ingresoRequerido = 0;
-        enganche = 0;
-        avaluo = 0;
-        comisionApertura = 0;
-        gastosNotariales = 0;
-        desembolsoTotal = 0;
-
-        // Scotiabank
-        scotiabank = Simula.getForCalc(3, $scope.selMens, $scope.selPlazo);
-
-
-        aforo = scotiabank.aforo;
-        factorPago = scotiabank.factorDePago;
-        tasaInteres = scotiabank.tasaDeInteres;
-        cat = scotiabank.cat;
-
-        montoCredito = Calculos.calculaMotoDelCredito(scotiabank.aforo, $scope.valor);
-        pagoMensual = Calculos.calcularPagoMensual(montoCredito, factorPago);
-        ingresoRequerido = Calculos.calculoIngresoRequeridoCreciente(pagoMensual, 3);
-
-        enganche = Calculos.calculoEnganche($scope.valor, montoCredito);
-        avaluo = Calculos.calcularAvaluoCreciente($scope.valor, 3, Avaluos);
-        comisionApertura = Calculos.calculoComisionApertura(montoCredito, 3);
-        gastosNotariales = Calculos.calculoGastosNotariales($scope.valor, gastosNotarialesXEstado);
-
-        desembolsoTotal = parseFloat(enganche) + parseFloat(avaluo) + parseFloat(comisionApertura) + parseFloat(gastosNotariales);
-        var grpScotiabank = [];
-        grpScotiabank.push({
-            name: scotiabank.nombreBanco,
-            pagoMensual: '$' + pagoMensual.formatMoney(2, '.', ','),
-            members: []
+            $scope.grupoScotiabank = grpScotiabank;
+        }).error(function (res) {
+            console.log("error de conexión server")
         });
+        ////////////////////////////////////////////////////
 
-        grpScotiabank[0].members.push({ name: "Pago mensual", quantity: '$' + pagoMensual.formatMoney(2, '.', ',') });
-        grpScotiabank[0].members.push({ name: "Monto del crédito", quantity: '$' + montoCredito.formatMoney(2, '.', ',') });
-        grpScotiabank[0].members.push({ name: "Tasa de interés", quantity: (tasaInteres * 100).toFixed(2) + '%' });
-        grpScotiabank[0].members.push({ name: "Ingreso requerido", quantity: '$' + ingresoRequerido.formatMoney(2, '.', ',') });
-        grpScotiabank[0].members.push({ name: "Incremento anual del pago", quantity: parseFloat(banorte.incrementoAnual * 100).toFixed(2) + "%" });
-        grpScotiabank[0].members.push({ name: "CAT", quantity: (cat * 100).toFixed(2) + '%' });
-        grpScotiabank[0].members.push({ name: "Gastos del crédito", quantity: undefined });
-        grpScotiabank[0].members.push({ name: "Enganche", quantity: '$' + enganche.formatMoney(2, '.', ',') });
-        grpScotiabank[0].members.push({ name: "Avalúo", quantity: '$' + avaluo.formatMoney(2, '.', ',') });
-        grpScotiabank[0].members.push({ name: "Comisión por apertura", quantity: '$' + comisionApertura.formatMoney(2, '.', ',') });
-        grpScotiabank[0].members.push({ name: "Gastos notariales", quantity: '$' + gastosNotariales.formatMoney(2, '.', ',') });
-        grpScotiabank[0].members.push({ name: "Desembolso total", quantity: '$' + desembolsoTotal.formatMoney(2, '.', ',') });
+        // Bancomer 4
+        $http({
+            url: 'http://wsl2.sisec.mx/api/Simulador',
+            method: "GET",
+            params: { idbanco: 4, vi: $scope.data.valorInmueble, plzo: $scope.data.selPlazo, estado: $scope.data.selEstado, msld: $scope.data.selMens, eng: $scope.data.enganche }
+        }).success(function (respuesta) {
+            var bank = respuesta;
+            console.log(respuesta);
 
-        $scope.grupoScotiabank = grpScotiabank;
+            var grpBancomer = [];
+            grpBancomer.push({
+                name: bank.banco,
+                members: [],
+                pagoMensual: 'NO APLICA' ,
+            });
+            grpBancomer[0].members.push({ name: "Pago mensual", quantity: 'NO APLICA' });
+            grpBancomer[0].members.push({ name: "Monto del crédito", quantity: 'NO APLICA' });
+            grpBancomer[0].members.push({ name: "Tasa de interés", quantity: 'NO APLICA' });
+            grpBancomer[0].members.push({ name: "Ingreso requerido", quantity: 'NO APLICA' });
+            grpBancomer[0].members.push({ name: "Incremento anual del pago", quantity: 'NO APLICA' });
+            grpBancomer[0].members.push({ name: "CAT", quantity: 'NO APLICA' });
+            grpBancomer[0].members.push({ name: "Gastos del crédito", quantity: 'NO APLICA' });
+            grpBancomer[0].members.push({ name: "Enganche", quantity: 'NO APLICA' });
+            grpBancomer[0].members.push({ name: "Avalúo", quantity: 'NO APLICA' });
+            grpBancomer[0].members.push({ name: "Comisión por apertura", quantity: 'NO APLICA' });
+            grpBancomer[0].members.push({ name: "Gastos notariales", quantity: 'NO APLICA' });
+            grpBancomer[0].members.push({ name: "Desembolso total", quantity: 'NO APLICA' });
 
-        aforo = 0;
-        factorPago = 0;
-        tasaInteres = 0;
-        cat = 0;
-        montoCredito = 0;
-        pagoMensual = 0;
-        ingresoRequerido = 0;
-        enganche = 0;
-        avaluo = 0;
-        comisionApertura = 0;
-        gastosNotariales = 0;
-        desembolsoTotal = 0;
+            $scope.grupoBancomer = grpBancomer;
+        }).error(function (res) {
+            console.log("error de conexión server")
+        });
+        ////////////////////////////////////////////////////
 
         // Afirme
-        afirme = Simula.getForCalc(5, $scope.selMens, $scope.selPlazo);
+        $http({
+            url: 'http://wsl2.sisec.mx/api/Simulador',
+            method: "GET",
+            params: { idbanco: 5, vi: $scope.data.valorInmueble, plzo: $scope.data.selPlazo, estado: $scope.data.selEstado, msld: $scope.data.selMens, eng: $scope.data.enganche }
+        }).success(function (respuesta) {
+            var bank = respuesta;
+            console.log(respuesta);
 
+            var grpAfirme = [];
+            grpAfirme.push({
+                name: bank.banco,
+                members: [],
+                pagoMensual: '$' + bank.pagomnsl.formatMoney(2, '.', ','),
+            });
+            grpAfirme[0].members.push({ name: "Pago mensual", quantity: '$' + bank.pagomnsl.formatMoney(2, '.', ',') });
+            grpAfirme[0].members.push({ name: "Monto del crédito", quantity: '$' + bank.montocredito.formatMoney(2, '.', ',') });
+            grpAfirme[0].members.push({ name: "Tasa de interés", quantity: (bank.tasa).toFixed(2) + '%' });
+            grpAfirme[0].members.push({ name: "Ingreso requerido", quantity: '$' + bank.ingreso.formatMoney(2, '.', ',') });
+            grpAfirme[0].members.push({ name: "Incremento anual del pago", quantity: parseFloat(bank.incremento).toFixed(2) + "%" });
+            grpAfirme[0].members.push({ name: "CAT", quantity: (bank.cat).toFixed(2) + '%' });
+            grpAfirme[0].members.push({ name: "Gastos del crédito", quantity: undefined });
+            grpAfirme[0].members.push({ name: "Enganche", quantity: '$' + bank.enganche.formatMoney(2, '.', ',') });
+            grpAfirme[0].members.push({ name: "Avalúo", quantity: '$' + bank.avaluo.formatMoney(2, '.', ',') });
+            grpAfirme[0].members.push({ name: "Comisión por apertura", quantity: '$' + bank.comaper.formatMoney(2, '.', ',') });
+            grpAfirme[0].members.push({ name: "Gastos notariales", quantity: '$' + bank.gastonot.formatMoney(2, '.', ',') });
+            grpAfirme[0].members.push({ name: "Desembolso total", quantity: '$' + bank.desembolso.formatMoney(2, '.', ',') });
 
-        aforo = afirme.aforo;
-        factorPago = afirme.factorDePago;
-        tasaInteres = afirme.tasaDeInteres;
-        cat = afirme.cat;
-
-        montoCredito = Calculos.calculaMotoDelCredito(afirme.aforo, $scope.valor);
-        pagoMensual = Calculos.calcularPagoMensual(montoCredito, factorPago);
-        ingresoRequerido = Calculos.calculoIngresoRequeridoCreciente(pagoMensual, 3);
-
-        enganche = Calculos.calculoEnganche($scope.valor, montoCredito);
-        avaluo = Calculos.calcularAvaluoCreciente($scope.valor, 3, Avaluos);
-        comisionApertura = Calculos.calculoComisionApertura(montoCredito, 3);
-        gastosNotariales = Calculos.calculoGastosNotariales($scope.valor, gastosNotarialesXEstado);
-
-        desembolsoTotal = parseFloat(enganche) + parseFloat(avaluo) + parseFloat(comisionApertura) + parseFloat(gastosNotariales);
-
-        var grpAfirme = [];
-        grpAfirme.push({
-            name: afirme.nombreBanco,
-            pagoMensual: '$' + pagoMensual.formatMoney(2, '.', ','),
-            members: []
+            $scope.grupoAfirme = grpAfirme;
+        }).error(function (res) {
+            console.log("error de conexión server")
         });
+        ////////////////////////////////////////////////////
 
-        grpAfirme[0].members.push({ name: "Pago mensual", quantity: '$' + pagoMensual.formatMoney(2, '.', ',') });
-        grpAfirme[0].members.push({ name: "Monto del crédito", quantity: '$' + montoCredito.formatMoney(2, '.', ',') });
-        grpAfirme[0].members.push({ name: "Tasa de interés", quantity: (tasaInteres * 100).toFixed(2) + '%' });
-        grpAfirme[0].members.push({ name: "Ingreso requerido", quantity: '$' + ingresoRequerido.formatMoney(2, '.', ',') });
-        grpAfirme[0].members.push({ name: "Incremento anual del pago", quantity: parseFloat(banorte.incrementoAnual * 100).toFixed(2) + "%" });
-        grpAfirme[0].members.push({ name: "CAT", quantity: (cat * 100).toFixed(2) + '%' });
-        grpAfirme[0].members.push({ name: "Gastos del crédito", quantity: undefined });
-        grpAfirme[0].members.push({ name: "Enganche", quantity: '$' + enganche.formatMoney(2, '.', ',') });
-        grpAfirme[0].members.push({ name: "Avalúo", quantity: '$' + avaluo.formatMoney(2, '.', ',') });
-        grpAfirme[0].members.push({ name: "Comisión por apertura", quantity: '$' + comisionApertura.formatMoney(2, '.', ',') });
-        grpAfirme[0].members.push({ name: "Gastos notariales", quantity: '$' + gastosNotariales.formatMoney(2, '.', ',') });
-        grpAfirme[0].members.push({ name: "Desembolso total", quantity: '$' + desembolsoTotal.formatMoney(2, '.', ',') });
+        // Banamex
+        $http({
+            url: 'http://wsl2.sisec.mx/api/Simulador',
+            method: "GET",
+            params: { idbanco: 6, vi: $scope.data.valorInmueble, plzo: $scope.data.selPlazo, estado: $scope.data.selEstado, msld: $scope.data.selMens, eng: $scope.data.enganche }
+        }).success(function (respuesta) {
+            var bank = respuesta;
+            //console.log(respuesta);
 
-        $scope.grupoAfirme = grpAfirme;
+            var grpBanamex = [];
+            grpBanamex.push({
+                name: bank.banco,
+                members: [],
+                pagoMensual: 'NO APLICA',
+            });
+            grpBanamex[0].members.push({ name: "Pago mensual", quantity: 'NO APLICA'});
+            grpBanamex[0].members.push({ name: "Monto del crédito", quantity: 'NO APLICA'});
+            grpBanamex[0].members.push({ name: "Tasa de interés", quantity: 'NO APLICA' });
+            grpBanamex[0].members.push({ name: "Ingreso requerido", quantity: 'NO APLICA'});
+            grpBanamex[0].members.push({ name: "Incremento anual del pago", quantity: 'NO APLICA' });
+            grpBanamex[0].members.push({ name: "CAT", quantity: 'NO APLICA' });
+            grpBanamex[0].members.push({ name: "Gastos del crédito", quantity: 'NO APLICA'});
+            grpBanamex[0].members.push({ name: "Enganche", quantity: 'NO APLICA'});
+            grpBanamex[0].members.push({ name: "Avalúo", quantity: 'NO APLICA'});
+            grpBanamex[0].members.push({ name: "Comisión por apertura", quantity: 'NO APLICA'});
+            grpBanamex[0].members.push({ name: "Gastos notariales", quantity: 'NO APLICA'});
+            grpBanamex[0].members.push({ name: "Desembolso total", quantity: 'NO APLICA'});
 
-        aforo = 0;
-        factorPago = 0;
-        tasaInteres = 0;
-        cat = 0;
-        montoCredito = 0;
-        pagoMensual = 0;
-        ingresoRequerido = 0;
-        enganche = 0;
-        avaluo = 0;
-        comisionApertura = 0;
-        gastosNotariales = 0;
-        desembolsoTotal = 0;
+            $scope.grupoBanamex = grpBanamex;
+        }).error(function (res) {
+            console.log("error de conexión server")
+        });
+        ////////////////////////////////////////////////////
 
         // HSBC
-        hsbc = Simula.getForCalc(7, $scope.selMens, $scope.selPlazo);
+        $http({
+            url: 'http://wsl2.sisec.mx/api/Simulador',
+            method: "GET",
+            params: { idbanco: 7, vi: $scope.data.valorInmueble, plzo: $scope.data.selPlazo, estado: $scope.data.selEstado, msld: $scope.data.selMens, eng: $scope.data.enganche }
+        }).success(function (respuesta) {
+            var bank = respuesta;
+            //console.log(respuesta);
 
+            var grpHSBC = [];
+            grpHSBC.push({
+                name: bank.banco,
+                members: [],
+                pagoMensual: '$' + bank.pagomnsl.formatMoney(2, '.', ','),
+            });
+            grpHSBC[0].members.push({ name: "Pago mensual", quantity: '$' + bank.pagomnsl.formatMoney(2, '.', ',') });
+            grpHSBC[0].members.push({ name: "Monto del crédito", quantity: '$' + bank.montocredito.formatMoney(2, '.', ',') });
+            grpHSBC[0].members.push({ name: "Tasa de interés", quantity: (bank.tasa).toFixed(2) + '%' });
+            grpHSBC[0].members.push({ name: "Ingreso requerido", quantity: '$' + bank.ingreso.formatMoney(2, '.', ',') });
+            grpHSBC[0].members.push({ name: "Incremento anual del pago", quantity: parseFloat(bank.incremento).toFixed(2) + "%" });
+            grpHSBC[0].members.push({ name: "CAT", quantity: (bank.cat).toFixed(2) + '%' });
+            grpHSBC[0].members.push({ name: "Gastos del crédito", quantity: undefined });
+            grpHSBC[0].members.push({ name: "Enganche", quantity: '$' + bank.enganche.formatMoney(2, '.', ',') });
+            grpHSBC[0].members.push({ name: "Avalúo", quantity: '$' + bank.avaluo.formatMoney(2, '.', ',') });
+            grpHSBC[0].members.push({ name: "Comisión por apertura", quantity: '$' + bank.comaper.formatMoney(2, '.', ',') });
+            grpHSBC[0].members.push({ name: "Gastos notariales", quantity: '$' + bank.gastonot.formatMoney(2, '.', ',') });
+            grpHSBC[0].members.push({ name: "Desembolso total", quantity: '$' + bank.desembolso.formatMoney(2, '.', ',') });
 
-        aforo = hsbc.aforo;
-        factorPago = hsbc.factorDePago;
-        tasaInteres = hsbc.tasaDeInteres;
-        cat = hsbc.cat;
-
-        montoCredito = Calculos.calculaMotoDelCredito(hsbc.aforo, $scope.valor);
-        pagoMensual = Calculos.calcularPagoMensual(montoCredito, factorPago);
-        ingresoRequerido = Calculos.calculoIngresoRequeridoCreciente(pagoMensual, 3);
-
-        enganche = Calculos.calculoEnganche($scope.valor, montoCredito);
-        avaluo = Calculos.calcularAvaluoCreciente($scope.valor, 3, Avaluos);
-        comisionApertura = Calculos.calculoComisionApertura(montoCredito, 3);
-        gastosNotariales = Calculos.calculoGastosNotariales($scope.valor, gastosNotarialesXEstado);
-
-        desembolsoTotal = parseFloat(enganche) + parseFloat(avaluo) + parseFloat(comisionApertura) + parseFloat(gastosNotariales);
-        var grpHSBC = [];
-        grpHSBC.push({
-            name: hsbc.nombreBanco,
-            pagoMensual: '$' + pagoMensual.formatMoney(2, '.', ','),
-            members: []
+            $scope.grupoHSBC = grpHSBC;
+        }).error(function (res) {
+            console.log("error de conexión server")
         });
-
-        grpHSBC[0].members.push({ name: "Pago mensual", quantity: '$' + pagoMensual.formatMoney(2, '.', ',') });
-        grpHSBC[0].members.push({ name: "Monto del crédito", quantity: '$' + montoCredito.formatMoney(2, '.', ',') });
-        grpHSBC[0].members.push({ name: "Tasa de interés", quantity: (tasaInteres * 100).toFixed(2) + '%' });
-        grpHSBC[0].members.push({ name: "Ingreso requerido", quantity: '$' + ingresoRequerido.formatMoney(2, '.', ',') });
-        grpHSBC[0].members.push({ name: "Incremento anual del pago", quantity: parseFloat(banorte.incrementoAnual * 100).toFixed(2) + "%" });
-        grpHSBC[0].members.push({ name: "CAT", quantity: (cat * 100).toFixed(2) + '%' });
-        grpHSBC[0].members.push({ name: "Gastos del crédito", quantity: undefined });
-        grpHSBC[0].members.push({ name: "Enganche", quantity: '$' + enganche.formatMoney(2, '.', ',') });
-        grpHSBC[0].members.push({ name: "Avalúo", quantity: '$' + avaluo.formatMoney(2, '.', ',') });
-        grpHSBC[0].members.push({ name: "Comisión por apertura", quantity: '$' + comisionApertura.formatMoney(2, '.', ',') });
-        grpHSBC[0].members.push({ name: "Gastos notariales", quantity: '$' + gastosNotariales.formatMoney(2, '.', ',') });
-        grpHSBC[0].members.push({ name: "Desembolso total", quantity: '$' + desembolsoTotal.formatMoney(2, '.', ',') });
-        $scope.grupoHSBC = grpHSBC;
-
-        aforo = 0;
-        factorPago = 0;
-        tasaInteres = 0;
-        cat = 0;
-        montoCredito = 0;
-        pagoMensual = 0;
-        ingresoRequerido = 0;
-        enganche = 0;
-        avaluo = 0;
-        comisionApertura = 0;
-        gastosNotariales = 0;
-        desembolsoTotal = 0;
+        ////////////////////////////////////////////////////
     });
 })();

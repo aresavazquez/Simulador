@@ -1331,9 +1331,8 @@
   "addedPluginsIos": [],
   "deletedPluginsIos": [],
   "changedFiles": [
-    "www\\js\\creciente20Controller.js",
-    "www\\js\\fijo20Controller.js",
-    "www\\js\\fijo15Controller.js"
+    "www\\js\\services.js",
+    "www\\js\\fijo20Controller.js"
   ],
   "deletedFiles": [],
   "addedPlugins": [],

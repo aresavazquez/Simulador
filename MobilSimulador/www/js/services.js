@@ -9,6 +9,17 @@
         };
     });
 
+    function muestraMensaje(titulo, mensaje, $ionicPopup) {
+        var alertPopup = $ionicPopup.alert({
+            title: titulo,
+            template: mensaje
+        });
+
+        alertPopup.then(function (res) {
+
+        });
+    }
+
     serv.factory('User', function() {
         return {
             getLocal: function () {
@@ -474,7 +485,8 @@
             }
         };
     });
-    serv.factory('SendMail', ['$http', function ($http) {
+
+    serv.factory('SendMail', ['$http', '$ionicPopup', function ($http, $ionicPopup) {
         return {
             mandar: function (datos) {
                 var variable = JSON.stringify(datos)
@@ -482,41 +494,42 @@
                 var Mensualidad = '';
                 var Plazo = '';
 
-                if (datos.selMens === "1") {
+                if (datos.selMens === 1) {
                     Mensualidad = 'Fija';
                 } else {
                     Mensualidad = 'Creciente';
                 }
 
-                if (datos.selPlazo === "2") {
+                if (datos.selPlazo === 2) {
                     Plazo = '15 a\u00F1os';
                 } else {
                     Plazo = '20 a\u00F1os';
                 }
 
-                var cuerpo = 'Estimado@: ' + datos.nombre + ' se realizo una simulación con los datos siguientes: valor de inmueble: ' + datos.valorInmueble + ' ,plazo de ' +Plazo+ ' y una mensualidad de '+Mensualidad; 
+                var nmensualidad = ' ' + Plazo + ' ' + Mensualidad;
+                //console.log('BANCOOOOO....', datos.simBanorte[0].members[0].quantity);
+                //var cuerpo = 'Estimado@: ' + datos.nombre + ' se realizo una simulación con los datos siguientes: valor de inmueble: ' + datos.valorInmueble + ' ,plazo de ' +Plazo+ ' y una mensualidad de '+Mensualidad; 
+                //var cuerpo = 'Estimad@: ' + datos.nombre + ' los resultados de banorte son los siguientes: \n' + 'pago mensual: ' + datos.simBanorte[0].members[0].quantity;
+
+                console.log(datos);
 
                 var objeto2 = {
-                    Asunto: 'Simulación',
-                    cuerpo: cuerpo,
+                    Asunto: 'Simulaci\u00F3n',
                     destinatario: datos.correo
                 }
 
                 $http({
                     url: 'http://wsl2.sisec.mx/api/Correo',
                     method: "GET",
-                    params: { Asunto: objeto2.Asunto, cuerpo: cuerpo, destinatario: objeto2.destinatario}
+                    params: { Asunto: objeto2.Asunto, destinatario: objeto2.destinatario, vi: datos.valorInmueble, plzo: datos.selPlazo, estado: datos.selEstado, msld: datos.selMens, eng: datos.enganche, nmensualidad: nmensualidad }
                     //params: { Asunto: 'prueba', cuerpo: 'prueba del correo', destinatario: 'larodriguez@socasesores.com'}
                 }).success(function (res) {
+                    muestraMensaje("Correcto", "Su correo se envio correctamente.", $ionicPopup);
                     var obj = res;
                     console.log(res);
-                    //if (obj.Valido === true) {
-                    //    console.log('se envio correo');
-                    //} else if (obj.Valido === false) {
-                    //    console.log('fracaso correo');
-                    //}
                 }).error(function (res) {
-                    console.log("error de conexión server")
+                    console.log("error de conexión server", res);
+                    muestraMensaje("Error", "Error con el servidor de correos, intenta nuevamente en unos minutos.", $ionicPopup);
                 });
 
                 //$http.post('http://localhost:13426/MailSvc.svc/Web/SendMail/' + objeto)

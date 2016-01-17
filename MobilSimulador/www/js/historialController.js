@@ -22,7 +22,7 @@
                     }
                     else {
                         $state.go("app.tabs.hresultado20Creciente", {
-                            valor: prospect.valor - prospect.enganche,
+                            valor: prospect.valor,
                             selMens: prospect.selMens,
                             selEstado: prospect.selEstado,
                             selPlazo: prospect.selPlazo,
@@ -36,7 +36,7 @@
                     }
                     else {
                         $state.go("app.tabs.hresultado15Creciente", {
-                            valor: prospect.valor - prospect.enganche,
+                            valor: prospect.valor,
                             selMens: prospect.selMens,
                             selEstado: prospect.selEstado,
                             selPlazo: prospect.selPlazo,
@@ -55,7 +55,7 @@
                     }
                     else {
                         $state.go("app.tabs.hresultado20Fijo", {
-                            valor: prospect.valor- prospect.enganche,
+                            valor: prospect.valor,
                             selMens: prospect.selMens,
                             selEstado: prospect.selEstado,
                             selPlazo: prospect.selPlazo,
@@ -69,7 +69,7 @@
                     }
                     else {
                         $state.go("app.tabs.hresultado15Fijo", {
-                            valor: prospect.valor - prospect.enganche,
+                            valor: prospect.valor,
                             selMens: prospect.selMens,
                             selEstado: prospect.selEstado,
                             selPlazo: prospect.selPlazo,
