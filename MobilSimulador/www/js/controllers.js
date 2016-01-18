@@ -66,11 +66,25 @@
         };
 
         $scope.entrar = function () {
-            if($scope.data.nombre === '' ||
-                $scope.data.apellido === '' ||
-                $scope.data.correo === '') {
-                muestraMensaje("Error", "Debe rellenar los campos de registro para continuar", $ionicPopup);
-            } else {
+            console.log(/[A-Za-z\ ]+/igm.test($scope.data.nombre))
+            if($scope.data.nombre == "" || !/^[A-Za-z\s]*$/igm.test($scope.data.nombre) ){
+                muestraMensaje("Error", "Debes introducir un nombre válido", $ionicPopup);
+                return;
+            }
+            if($scope.data.apellido == "" || !/^[A-Za-z\s]*$/igm.test($scope.data.apellido) ){
+                muestraMensaje("Error", "Debes introducir un apellido válido", $ionicPopup);
+                return;
+            }
+            // "!" = siginifica "no"
+            if($scope.data.correo == "" || !/^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/igm.test($scope.data.correo) ){
+                muestraMensaje("Error", "Debes introducir un correo válido", $ionicPopup);
+                return;
+            }
+            //if($scope.data.nombre === '' ||
+            //    $scope.data.apellido === '' ||
+            //    $scope.data.correo === '') {
+            //    muestraMensaje("Error", "Debe rellenar los campos de registro para continuar", $ionicPopup);
+             else {
 
                 $http.post('http://wsl2.sisec.mx/api/Registro', $scope.data);
                 window.localStorage.setItem('usuario', JSON.stringify($scope.data));

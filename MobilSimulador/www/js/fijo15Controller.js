@@ -107,23 +107,7 @@
             } else {
                 data = $scope.data;
                 var myPopup = $ionicPopup.show({
-                    template: '<input type="text" placeholder="Nombre" ng-model="data.nombre" />'
-                    + '<input name="myfrom" type="email" placeholder="ejemplo@email.com" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" ng-model="data.correo" />'
-                    + '<span class="error" ng-show="myform.email.$error.pattern">invalid email!</span>'
-                    + '<input type="number" placeholder="Teléfono" ng-model="data.telefono" />'
-                    + '<div class="card">'
-                    + '    <ul class="list checkAviso">'
-                    + '        <li class="item item-checkbox">'
-                    + '            <label class="checkbox">'
-                    + '                <input type="checkbox" class="acepto" ng-model="data.acepto">'
-                    + '            </label>'
-                    + '            Acepto el Aviso de Privacidad.'
-                    + '        </li>'
-                    + '    </ul>'
-                    + '    <div class="item item-text-wrap aviso">'
-                    + '        Respecto al manejo de sus datos favor de revisar el Aviso de Privacidad.'
-                    + '    </div>'
-                    + '</div>',
+                    templateUrl: "templates/destinatario.html",
                     title: 'Destinatario',
                     subTitle: '',
                     scope: $scope,
@@ -144,9 +128,31 @@
                       }
                     ]
                 });
+                function muestraMensaje(titulo, mensaje, $ionicPopup) {
+                    var alertPopup = $ionicPopup.alert({
+                        title: titulo,
+                        template: mensaje
+                    });
+            
+                    alertPopup.then(function (res) {
+            
+                    });
+                };
+
                 myPopup.then(function (res) {
                     if ($scope.cancelar === false) {
-
+                        if ($scope.data.nombre == "" || !/^[A-Za-z\s]*$/igm.test($scope.data.nombre) ){
+                            muestraMensaje("Error", "Debes introducir un nombre válido", $ionicPopup);
+                            return;
+                        }
+                        if($scope.data.correo == "" || !/^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/igm.test($scope.data.correo) ){
+                            muestraMensaje("Error", "Debes introducir un correo válido", $ionicPopup);
+                            return;
+                        }
+                        if($scope.data.telefono == "" || !/[0-9]/.test($scope.data.telefono) ){
+                            muestraMensaje("Error", "Debes introducir un teléfono válido", $ionicPopup);
+                            return;
+                        } 
                         if ($scope.data.acepto === true) {
                             SendMail.mandar($scope.data);
                             //$ionicPopup.alert({
